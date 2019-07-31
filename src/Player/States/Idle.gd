@@ -7,7 +7,7 @@ onready var jump_delay: Timer = $JumpDelay
 func _setup() -> void:
 	# force update once at start of game
 	var move: = get_parent()
-	owner.move_and_slide(move.velocity, owner.FLOOR_NORMAL)
+	owner.move_and_slide(move.velocity, Vector3.UP)
 
 
 func unhandled_input(event: InputEvent) -> void:

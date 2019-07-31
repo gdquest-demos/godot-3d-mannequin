@@ -6,9 +6,7 @@ signal jumped
 
 onready var jump_delay: Timer = $JumpDelay
 
-
-func _get_configuration_warning() -> String:
-	return "" if $JumpDelay else "%s requires a Timer child named JumpDelay" % name
+export var jump_impulse: = 20.0
 
 
 func unhandled_input(event: InputEvent) -> void:

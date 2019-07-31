@@ -3,11 +3,11 @@
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/Player/Camera/Camera.gd" type="Script" id=2]
 [ext_resource path="res://src/Player/PlayerMesh.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/StateMachine/StateMachine.gd" type="Script" id=4]
-[ext_resource path="res://src/StateMachine/States/Move.gd" type="Script" id=5]
-[ext_resource path="res://src/StateMachine/States/Idle.gd" type="Script" id=6]
-[ext_resource path="res://src/StateMachine/States/Air.gd" type="Script" id=7]
-[ext_resource path="res://src/StateMachine/States/Run.gd" type="Script" id=8]
+[ext_resource path="res://src/Utils/StateMachine.gd" type="Script" id=4]
+[ext_resource path="res://src/Player/States/Move.gd" type="Script" id=5]
+[ext_resource path="res://src/Player/States/Idle.gd" type="Script" id=6]
+[ext_resource path="res://src/Player/States/Air.gd" type="Script" id=7]
+[ext_resource path="res://src/Player/States/Run.gd" type="Script" id=8]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.25
@@ -53,5 +53,3 @@ one_shot = true
 
 [node name="Run" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 8 )
-
-[connection signal="transitioned" from="StateMachine" to="PlayerMesh" method="_on_StateMachine_transitioned"]
