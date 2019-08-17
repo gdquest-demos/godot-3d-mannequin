@@ -10,7 +10,7 @@ func physics_process(delta: float) -> void:
 	var move_direction: = get_move_direction()
 	velocity = move_direction * max_speed * delta
 	owner.move_and_slide(velocity, Vector3.UP)
-	owner.rotation.y = move_direction.angle_to(Vector3.FORWARD)
+	owner.rotation.y = -Vector3.FORWARD.angle_to(move_direction) * move_direction.x
 
 
 static func get_move_direction() -> Vector3:
