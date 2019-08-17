@@ -1,11 +1,10 @@
 extends Node
 class_name StateMachine
 """
-Hierarchical State machine for the player.
-Initializes states and delegates engine callbacks (_physics_process, _unhandled_input) to the state.
+Generic State Machine. Initializes states and delegates engine callbacks
+(_physics_process, _unhandled_input) to the active state.
 """
 
-signal transitioned(transition)
 
 export var initial_state: = NodePath()
 
@@ -18,6 +17,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	yield(owner, "ready")
 	state.enter()
 
 
@@ -32,13 +32,12 @@ func _physics_process(delta: float) -> void:
 func transition_to(target_state_path: String, msg: Dictionary = {}) -> void:
 	if not has_node(target_state_path):
 		return
+
 	var target_state: = get_node(target_state_path)
-	assert target_state.is_composite == false
-	
+
 	state.exit()
 	self.state = target_state
 	state.enter(msg)
-	emit_signal("transitioned", target_state_path)
 
 
 func set_state(value: State) -> void:

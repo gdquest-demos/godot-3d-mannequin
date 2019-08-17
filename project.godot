@@ -17,12 +17,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://src/Utils/State.gd"
+"path": "res://src/Main/StateMachine/State.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://src/Utils/StateMachine.gd"
+"path": "res://src/Main/StateMachine/StateMachine.gd"
 } ]
 _global_script_class_icons={
 "Player": "",
