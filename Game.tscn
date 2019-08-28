@@ -41,7 +41,6 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="Obstacles" type="Spatial" parent="TestMap"]
-editor/display_folded = true
 
 [node name="MeshInstance" type="MeshInstance" parent="TestMap/Obstacles"]
 editor/display_folded = true
@@ -107,6 +106,17 @@ material/0 = SubResource( 5 )
 [node name="StaticBody" type="StaticBody" parent="TestMap/Obstacles/MeshInstance8"]
 
 [node name="CollisionShape" type="CollisionShape" parent="TestMap/Obstacles/MeshInstance8/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="MeshInstance9" type="MeshInstance" parent="TestMap/Obstacles"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3.99933, -6 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="TestMap/Obstacles/MeshInstance9"]
+
+[node name="CollisionShape" type="CollisionShape" parent="TestMap/Obstacles/MeshInstance9/StaticBody"]
 shape = SubResource( 6 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="TestMap/Obstacles"]

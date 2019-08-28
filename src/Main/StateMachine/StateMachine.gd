@@ -38,6 +38,8 @@ func transition_to(target_state_path: String, msg: Dictionary = {}) -> void:
 	state.exit()
 	self.state = target_state
 	state.enter(msg)
+	#TODO: Make this happen via a signal
+	owner.get_node("PlayerMesh")._on_StateMachine_transitioned(target_state_path)
 
 
 func set_state(value: State) -> void:
