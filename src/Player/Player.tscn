@@ -25,11 +25,15 @@ script = ExtResource( 1 )
 
 [node name="CameraAnchor" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0 )
+script = ExtResource( 2 )
 
 [node name="Camera" type="Camera" parent="CameraAnchor"]
 transform = Transform( 0.999937, 0.00679257, -0.00893151, 0, 0.795964, 0.605344, 0.011221, -0.605306, 0.795914, -0.0556007, 4.28101, 4.9547 )
 current = true
-script = ExtResource( 2 )
+
+[node name="RotateDelay" type="Timer" parent="CameraAnchor"]
+wait_time = 0.25
+one_shot = true
 
 [node name="MoveDirectionRef" type="MeshInstance" parent="CameraAnchor"]
 visible = false
