@@ -21,7 +21,7 @@ func physics_process(delta: float) -> void:
 		#Make sure we don't end up winding
 		if owner.rotation.y > PI:
 			owner.rotation.y -= 2 * PI
-		if owner.rotation.y < -PI:
+		elif owner.rotation.y < -PI:
 			owner.rotation.y += 2 * PI
 
 	velocity = calculate_velocity(velocity, max_speed, move_speed, delta, move_direction.rotated(Vector3.UP, (input_offset)))
