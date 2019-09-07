@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/Player/Camera/Camera.gd" type="Script" id=2]
@@ -8,13 +8,6 @@
 [ext_resource path="res://src/Player/States/Idle.gd" type="Script" id=6]
 [ext_resource path="res://src/Player/States/Air.gd" type="Script" id=7]
 [ext_resource path="res://src/Player/States/Run.gd" type="Script" id=8]
-
-[sub_resource type="CubeMesh" id=1]
-size = Vector3( 0.25, 0.25, 0.25 )
-
-[sub_resource type="SpatialMaterial" id=2]
-flags_transparent = true
-albedo_color = Color( 1, 1, 1, 0.45098 )
 
 [sub_resource type="CapsuleShape" id=3]
 radius = 0.25
@@ -34,11 +27,6 @@ current = true
 [node name="RotateDelay" type="Timer" parent="CameraAnchor"]
 wait_time = 0.25
 one_shot = true
-
-[node name="MoveDirectionRef" type="MeshInstance" parent="CameraAnchor"]
-visible = false
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
 
 [node name="OcclusionRay" type="RayCast" parent="CameraAnchor"]
 enabled = true
