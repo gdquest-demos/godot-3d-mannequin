@@ -6,12 +6,16 @@ export var yinvert_multiplier: = -1
 export var camera_backwards_deadzone := 0.3
 var _camera_rotating: = false
 
+onready var initial_camera_pos = $Camera.get_translation()
+onready var initial_anchor_pos = get_translation()
 onready var rotation_delay: Timer = $RotateDelay
-
+onready var occlusion_ray: RayCast = $OcclusionRay
 
 func _ready() -> void:
 	_target = owner
 	set_as_toplevel(true)
+	occlusion_ray.set_cast_to(initial_camera_pos)
+
 
 func physics_process(delta: float, move_direction: Vector3) -> void:
 	#TODO: Remove move direction visual aid - or turn it into a gizmo?
@@ -19,7 +23,7 @@ func physics_process(delta: float, move_direction: Vector3) -> void:
 
 	#Snap the camera to the player position
 	var pos = get_global_transform()
-	pos.origin = owner.get_global_transform().origin
+	pos.origin = owner.get_global_transform().origin + initial_anchor_pos
 	set_global_transform(pos)
 
 	var camera_direction: = get_camera_direction()
@@ -49,14 +53,11 @@ func physics_process(delta: float, move_direction: Vector3) -> void:
 		#Apply manual camera input
 		if camera_direction.length() > 1:
 			camera_direction = camera_direction.normalized()
-		else:
-			if camera_direction.x != 0:
-				rotation.y -= camera_direction.x * camera_rotation_speed.x * delta
-			if camera_direction.y != 0:
-				rotation.x -= camera_direction.y * camera_rotation_speed.y * delta * yinvert_multiplier
-				rotation.x = clamp(rotation.x, -0.75, 0.9)
-		#TODO: Move camera node along local -Z until no occluding geo is in the way
-		#TODO: Make occluding geo transparent?
+		if camera_direction.x != 0:
+			rotation.y -= camera_direction.x * camera_rotation_speed.x * delta
+		if camera_direction.y != 0:
+			rotation.x -= camera_direction.y * camera_rotation_speed.y * delta * yinvert_multiplier
+			rotation.x = clamp(rotation.x, -0.75, 1.25)
 
 	#Make sure we don't end up winding
 	if rotation.y > PI:
@@ -66,6 +67,16 @@ func physics_process(delta: float, move_direction: Vector3) -> void:
 
 	if _camera_rotating == false:
 		rotation_delay.stop()
+
+	#If there is a body between the camera and the player, move the camera closer
+	if occlusion_ray.is_colliding():
+		var offset_pos = $Camera.get_global_transform()
+		if offset_pos.origin != occlusion_ray.get_collision_point():
+			offset_pos.origin = occlusion_ray.get_collision_point()
+			$Camera.set_global_transform(offset_pos)
+	else:
+		if $Camera.get_translation() != initial_camera_pos:
+			$Camera.set_translation(initial_camera_pos)
 
 
 static func get_camera_direction() -> Vector2:

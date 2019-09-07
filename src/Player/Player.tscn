@@ -28,7 +28,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0 )
 script = ExtResource( 2 )
 
 [node name="Camera" type="Camera" parent="CameraAnchor"]
-transform = Transform( 0.999937, 0.00679257, -0.00893151, 0, 0.795964, 0.605344, 0.011221, -0.605306, 0.795914, -0.0556007, 4.28101, 4.9547 )
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 5 )
 current = true
 
 [node name="RotateDelay" type="Timer" parent="CameraAnchor"]
@@ -39,6 +39,9 @@ one_shot = true
 visible = false
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
+
+[node name="OcclusionRay" type="RayCast" parent="CameraAnchor"]
+enabled = true
 
 [node name="PlayerMesh" parent="." instance=ExtResource( 3 )]
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
