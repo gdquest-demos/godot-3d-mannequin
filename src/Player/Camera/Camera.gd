@@ -26,11 +26,8 @@ func physics_process(delta: float, move_direction: Vector3) -> void:
 	global_transform = current_position
 	var input_direction: = get_input_direction()
 
-	var is_moving_towards_camera: = move_direction.x <= -backwards_deadzone or move_direction.x >= backwards_deadzone
-	if not input_direction and is_moving_towards_camera:
-		# TODO: Automatically reset camera vertical rotation over time
-		auto_rotate(move_direction)
-	else:
+	var is_moving_towards_camera: = move_direction.x >= -backwards_deadzone and move_direction.x <= backwards_deadzone
+	if input_direction.length() > 0:
 		self._is_auto_rotating = false
 		if input_direction.x != 0:
 			rotation.y -= input_direction.x * rotation_speed.x * delta
@@ -38,6 +35,11 @@ func physics_process(delta: float, move_direction: Vector3) -> void:
 			var angle: = input_direction.y * rotation_speed.y * delta
 			rotation.x += angle * -1.0 if is_y_inverted else angle
 			rotation.x = clamp(rotation.x, -0.75, 1.25)
+	elif not is_moving_towards_camera:
+		# TODO: Automatically reset camera vertical rotation over time
+		auto_rotate(move_direction)
+	else:
+		self._is_auto_rotating = false
 
 	# Make sure we don't end up winding
 	if rotation.y > PI:
@@ -52,14 +54,13 @@ func physics_process(delta: float, move_direction: Vector3) -> void:
 			global_offset.origin = occlusion_ray.get_collision_point()
 			camera.global_transform = global_offset
 	elif camera.translation != initial_position:
-		camera.translation = initial_position
+		camera.translation = lerp(camera.translation, initial_position, 0.05)
 
 
 func auto_rotate(move_direction: Vector3) -> void:
 	if not _is_auto_rotating:
-		_is_auto_rotating = true
-
-	if _is_auto_rotating and rotate_delay.is_stopped():
+		self._is_auto_rotating = true
+	elif rotate_delay.is_stopped():
 		var offset: float = owner.rotation.y - rotation.y
 		var target_angle: float = (
 			owner.rotation.y - 2 * PI if offset > PI 

@@ -14,15 +14,16 @@ func physics_process(delta: float) -> void:
 
 	#Use Vector2 to calculate angle since Vector3.angle_to() returns angular distance/angular diameter rather than the angle itself
 	var move_direction_2d: = Vector2(move_direction.x, move_direction.z)
-	var rotation: = move_direction_2d.angle_to(Vector2.UP)
+	var rotation: = move_direction_2d.angle_to(Vector2.UP) + input_offset
 
 	if move_direction_2d.length() > 0:
-		owner.rotation.y = input_offset + rotation
 		#Make sure we don't end up winding
-		if owner.rotation.y > PI:
+		if owner.rotation.y - rotation > PI:
 			owner.rotation.y -= 2 * PI
-		elif owner.rotation.y < -PI:
+		elif owner.rotation.y - rotation < -PI:
 			owner.rotation.y += 2 * PI
+
+		owner.rotation.y = lerp(owner.rotation.y, rotation, 0.1)
 
 	velocity = calculate_velocity(velocity, max_speed, move_speed, delta, move_direction.rotated(Vector3.UP, (input_offset)))
 	if velocity.y == 0:
