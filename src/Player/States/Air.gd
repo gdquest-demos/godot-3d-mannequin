@@ -16,6 +16,9 @@ func physics_process(delta: float) -> void:
 
 	if owner.is_on_floor():
 		_state_machine.transition_to("Move/Idle")
+	if owner.is_on_ceiling():
+		_parent.velocity.y = 0
+	#if at ledge, transition to ledge
 
 
 func enter(msg: Dictionary = {}) -> void:

@@ -5,6 +5,7 @@ export var move_speed: = Vector3(500, 500, 500)
 export var max_rotation_speed: = 0.5
 
 var velocity: = Vector3.ZERO
+var jump_velocity = Vector3(0, 20, 0)
 onready var _camera: Spatial = owner.get_node("CameraAnchor")
 
 
@@ -25,12 +26,10 @@ func physics_process(delta: float) -> void:
 
 		owner.rotation.y = lerp(owner.rotation.y, rotation, 0.1)
 
-	velocity = calculate_velocity(velocity, max_speed, move_speed, delta, move_direction.rotated(Vector3.UP, (input_offset)))
-	if velocity.y == 0:
-		velocity.y = -0.01
-	owner.move_and_slide(velocity, Vector3.UP)
-
-	_camera.physics_process(delta, move_direction)
+	var new_velocity = calculate_velocity(velocity, max_speed, move_speed, delta, move_direction.rotated(Vector3.UP, (input_offset)))
+	if new_velocity.y == 0:
+		new_velocity.y = -0.01
+	owner.move_and_slide(new_velocity, Vector3.UP)
 
 
 static func get_move_direction() -> Vector3:
@@ -53,7 +52,7 @@ static func calculate_velocity(
 		if move_direction.length() > 1:
 			move_direction = move_direction.normalized()
 
-		new_velocity = move_direction * delta * move_speed
+		new_velocity += move_direction * delta * move_speed
 		if new_velocity.length() > max_speed.z:
 			new_velocity = new_velocity.normalized() * max_speed.z
 		new_velocity.y = old_velocity.y

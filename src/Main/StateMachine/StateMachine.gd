@@ -5,6 +5,7 @@ Generic State Machine. Initializes states and delegates engine callbacks
 (_physics_process, _unhandled_input) to the active state.
 """
 
+signal transitioned(state_path)
 
 export var initial_state: = NodePath()
 
@@ -38,8 +39,7 @@ func transition_to(target_state_path: String, msg: Dictionary = {}) -> void:
 	state.exit()
 	self.state = target_state
 	state.enter(msg)
-	#TODO: Make this happen via a signal
-	owner.get_node("PlayerMesh")._on_StateMachine_transitioned(target_state_path)
+	emit_signal("transitioned", target_state_path)
 
 
 func set_state(value: State) -> void:

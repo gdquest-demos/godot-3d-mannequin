@@ -7,7 +7,11 @@ onready var jump_delay: Timer = $JumpDelay
 func unhandled_input(event: InputEvent) -> void:
 	#TODO: press to charge, release to jump?
 	if event.is_action_pressed("jump"):
-		_state_machine.transition_to("Move/Air", { velocity = _parent.velocity + Vector3(0, 20, 0) })
+		_state_machine.transition_to("Move/Air", { velocity = _parent.velocity + _parent.jump_velocity })
+	elif event.is_action_pressed("aim_toggle"):
+		#Move with slower max speed?
+		#_state_machine.transition_to("Move/Aim")
+		pass
 
 
 func physics_process(delta: float) -> void:
