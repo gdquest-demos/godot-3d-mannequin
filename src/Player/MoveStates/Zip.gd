@@ -1,7 +1,7 @@
 extends State
 
 
-onready var _camera: Spatial = owner.get_node("CameraAnchor")
+onready var _camera: Spatial = owner.get_node("CameraAnchor/StateMachine/Camera")
 
 var zip_speed:= 10.0
 var zip_target: Vector3 = Vector3(0, 0, 0)

@@ -1,8 +1,6 @@
 extends State
 
 
-onready var _camera: Spatial = owner.get_node("CameraAnchor")
-
 export var fov: = 40.0
 export var rotation_speed: = Vector2(1.0, 1.0)
 export var is_y_inverted: = true
@@ -15,7 +13,9 @@ func unhandled_input(event: InputEvent) -> void:
 		_state_machine.transition_to("Camera/Default")
 	elif event.is_action_pressed("action"):
 		_state_machine.transition_to("Camera/Default")
-		owner.get_node("StateMachine").transition_to("Move/Zip", { zip_target = _camera.hook_ray.get_collision_point() if _camera.hook_ray.is_colliding() else owner.get_global_transform().origin })
+		owner.get_node("StateMachine").transition_to("Move/Zip", { zip_target = _parent.hook_ray.get_collision_point() if _parent.hook_ray.is_colliding() else owner.get_global_transform().origin })
+	else:
+		_parent.unhandled_input(event)
 
 
 func physics_process(delta: float) -> void:
@@ -32,5 +32,5 @@ func enter(msg: Dictionary = {}) -> void:
 	_parent.enter(msg)
 
 func exit() -> void:
-	_camera.hook_target.visible = false
+	_parent.hook_target.visible = false
 	_parent.exit()
