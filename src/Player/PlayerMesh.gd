@@ -1,5 +1,6 @@
 extends Spatial
 
+
 onready var animation_tree : AnimationTree = $Rig/AnimationTree
 
 var _state_machine
@@ -23,7 +24,3 @@ func _travel(transition: String) -> void:
 
 func _on_StateMachine_transitioned(transition) -> void:
 	_travel(transition)
-
-
-func _on_StateMachine_state_transitioned(state_path):
-	pass # Replace with function body.

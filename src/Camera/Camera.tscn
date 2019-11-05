@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/Camera/Camera.gd" type="Script" id=1]
+[ext_resource path="res://assets/2d/reticle.png" type="Texture" id=2]
+[ext_resource path="res://src/Main/StateMachine/StateMachine.gd" type="Script" id=3]
+[ext_resource path="res://src/Camera/CameraStates/Camera.gd" type="Script" id=4]
+[ext_resource path="res://src/Camera/CameraStates/CameraDefault.gd" type="Script" id=5]
+[ext_resource path="res://src/Camera/CameraStates/Aim.gd" type="Script" id=6]
+
+[node name="Camera" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 5 )
+current = true
+
+[node name="OcclusionRay" type="RayCast" parent="."]
+
+[node name="AimRay" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0 )
+cast_to = Vector3( 0, 0, -20 )
+
+[node name="AimTarget" type="Sprite3D" parent="."]
+visible = false
+pixel_size = 0.001
+texture = ExtResource( 2 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+initial_state = NodePath("Camera/Default")
+
+[node name="Camera" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Default" type="Node" parent="StateMachine/Camera"]
+script = ExtResource( 5 )
+
+[node name="Aim" type="Node" parent="StateMachine/Camera"]
+script = ExtResource( 6 )

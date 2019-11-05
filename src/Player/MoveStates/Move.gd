@@ -1,38 +1,52 @@
 extends State
 
+
 export var max_speed: = Vector3(50.0, 50.0, 500.0)
 export var move_speed: = Vector3(500, 500, 500)
 export var max_rotation_speed: = 0.5
 
 var velocity: = Vector3.ZERO
 var jump_velocity = Vector3(0, 20, 0)
-onready var _camera: Spatial = owner.get_node("CameraAnchor")
+
+
+func unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("jump"):
+		_state_machine.transition_to("Move/Air", { velocity = velocity + jump_velocity })
 
 
 func physics_process(delta: float) -> void:
-	var input_offset: float = _camera.global_transform.basis.get_euler().y
-	var move_direction: = get_move_direction()
+	var input_direction: = get_input_direction()
 
-	#Use Vector2 to calculate angle since Vector3.angle_to() returns angular distance/angular diameter rather than the angle itself
-	var move_direction_2d: = Vector2(move_direction.x, move_direction.z)
-	var rotation: = move_direction_2d.angle_to(Vector2.UP) + input_offset
-
-	if move_direction_2d.length() > 0:
-		#Make sure we don't end up winding
-		if owner.rotation.y - rotation > PI:
-			owner.rotation.y -= 2 * PI
-		elif owner.rotation.y - rotation < -PI:
-			owner.rotation.y += 2 * PI
-
-		owner.rotation.y = lerp(owner.rotation.y, rotation, 0.1)
-
-	var new_velocity = calculate_velocity(velocity, max_speed, move_speed, delta, move_direction.rotated(Vector3.UP, (input_offset)))
+	#The basis holds the (right, up, and -forwards) vectors of our camera.
+	#Multiplied by our input and summed together gets us a final direction vector relative to the camera
+	var forwards: Vector3 = owner.camera.global_transform.basis.z * input_direction.z
+	var right: Vector3 = owner.camera.global_transform.basis.x * input_direction.x
+	var move_direction: = (forwards + right).normalized()
+	move_direction.y = 0
+	
+	#Rotation
+	owner.look_at(owner.global_transform.origin + move_direction, Vector3.UP)
+	
+	#Movement
+	var new_velocity = calculate_velocity(velocity, max_speed, move_speed, delta, move_direction)
 	if new_velocity.y == 0:
 		new_velocity.y = -0.01
 	owner.move_and_slide(new_velocity, Vector3.UP)
 
 
-static func get_move_direction() -> Vector3:
+func enter(msg: Dictionary = {}) -> void:
+	owner.camera.connect("aim_fired", self, "on_Camera_aim_fired")
+
+
+func exit() -> void:
+	owner.camera.disconnect("aim_fired", self, "on_Camera_aim_fired")
+
+
+func on_Camera_aim_fired(target_vector: Vector3) -> void:
+	_state_machine.transition_to("Move/Zip", { zip_target = target_vector })
+
+
+static func get_input_direction() -> Vector3:
 	return Vector3(
 			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 			0,
