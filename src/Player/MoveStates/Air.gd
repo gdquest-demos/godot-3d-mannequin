@@ -1,17 +1,9 @@
-tool
 extends State
-
-
-onready var jump_delay: Timer = $JumpDelay
-
-
-func unhandled_input(event: InputEvent) -> void:
-	_parent.unhandled_input(event)
 
 
 func physics_process(delta: float) -> void:
 	#TODO: Adjust peak of jump height depending on when jump input is released
-	_parent.velocity -= Vector3(0, delta * 50, 0)
+	_parent.velocity -= Vector3(0, delta * _parent.max_speed.y, 0)
 	_parent.physics_process(delta)
 
 	if owner.is_on_floor():
