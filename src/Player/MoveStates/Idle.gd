@@ -1,4 +1,7 @@
 extends State
+"""
+Logic state for when there is no movement input.
+"""
 
 
 onready var jump_delay: Timer = $JumpDelay

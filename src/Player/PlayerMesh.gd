@@ -1,4 +1,10 @@
 extends Spatial
+"""
+Simple helper class that controls the animation tree transitions for the rig.
+
+It has a signal connected to the player state machine, and uses the resulting
+state names to translate them into the states for the animation tree.
+"""
 
 
 onready var animation_tree : AnimationTree = $Rig/AnimationTree

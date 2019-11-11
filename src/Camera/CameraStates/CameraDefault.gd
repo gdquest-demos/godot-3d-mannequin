@@ -1,4 +1,7 @@
 extends State
+"""
+Logic state for the camera - implies no modification to the camera settings.
+"""
 
 
 func unhandled_input(event: InputEvent) -> void:

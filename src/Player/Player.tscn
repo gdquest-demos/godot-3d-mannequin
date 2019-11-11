@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/Player/PlayerMesh.tscn" type="PackedScene" id=2]
@@ -7,8 +7,6 @@
 [ext_resource path="res://src/Player/MoveStates/Idle.gd" type="Script" id=5]
 [ext_resource path="res://src/Player/MoveStates/Air.gd" type="Script" id=6]
 [ext_resource path="res://src/Player/MoveStates/Run.gd" type="Script" id=7]
-[ext_resource path="res://src/Player/MoveStates/Zip.gd" type="Script" id=8]
-[ext_resource path="res://src/Player/MoveStates/Hang.gd" type="Script" id=9]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.25
@@ -43,10 +41,4 @@ script = ExtResource( 6 )
 
 [node name="Run" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 7 )
-
-[node name="Zip" type="Node" parent="StateMachine/Move"]
-script = ExtResource( 8 )
-
-[node name="Hang" type="Node" parent="StateMachine/Move"]
-script = ExtResource( 9 )
 [connection signal="transitioned" from="StateMachine" to="PlayerMesh" method="_on_StateMachine_transitioned"]

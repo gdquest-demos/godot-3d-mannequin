@@ -1,4 +1,11 @@
 extends State
+"""
+Parent state for all movement based states for the Player.
+
+This state holds all of the main logic, with the state itself being configured
+or have its functions overriden or called by the child states. This keeps the
+logic contained in a central location while being easily modifiable.
+"""
 
 
 export var max_speed: = Vector3(50.0, 50.0, 500.0)
@@ -35,11 +42,11 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
-	owner.camera.connect("aim_fired", self, "on_Camera_aim_fired")
+	pass
 
 
 func exit() -> void:
-	owner.camera.disconnect("aim_fired", self, "on_Camera_aim_fired")
+	pass
 
 
 func on_Camera_aim_fired(target_vector: Vector3) -> void:

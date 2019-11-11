@@ -1,4 +1,7 @@
 extends State
+"""
+Logic state for the player falling and jumping.
+"""
 
 
 func physics_process(delta: float) -> void:

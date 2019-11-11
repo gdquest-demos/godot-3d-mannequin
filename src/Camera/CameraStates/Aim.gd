@@ -1,4 +1,8 @@
 extends State
+"""
+Logic state for the camera where configuration are made to the camera to set
+the field of view, position offset (over the shoulder), etc.
+"""
 
 
 export var first_person_aiming: bool = false

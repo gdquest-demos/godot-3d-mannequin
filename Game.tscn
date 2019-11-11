@@ -169,7 +169,7 @@ shape = SubResource( 8 )
 transform = Transform( 0.766044, 0.166366, -0.620885, 0.271654, 0.791635, 0.547283, 0.582563, -0.587909, 0.561234, 0, 12, 0 )
 shadow_enabled = true
 
-[node name="Camera" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
+[node name="CameraAnchor" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
