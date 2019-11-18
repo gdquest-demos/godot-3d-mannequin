@@ -1,11 +1,10 @@
 extends State
 """
-Logic state for the player falling and jumping.
+State for when the player is jumping and falling.
 """
 
 
 func physics_process(delta: float) -> void:
-	#TODO: Adjust peak of jump height depending on when jump input is released
 	_parent.velocity -= Vector3(0, delta * _parent.max_speed.y, 0)
 	_parent.physics_process(delta)
 
@@ -13,7 +12,6 @@ func physics_process(delta: float) -> void:
 		_state_machine.transition_to("Move/Idle")
 	if owner.is_on_ceiling():
 		_parent.velocity.y = 0
-	#if at ledge, transition to ledge
 
 
 func enter(msg: Dictionary = {}) -> void:

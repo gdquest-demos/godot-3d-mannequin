@@ -1,10 +1,10 @@
 extends State
 """
-Parent state for all movement based states for the Player.
+Parent state for all movement-related states for the Player.
 
-This state holds all of the main logic, with the state itself being configured
-or have its functions overriden or called by the child states. This keeps the
-logic contained in a central location while being easily modifiable.
+Holds all of the base movement logic. 
+Child states can override this state's functions or change its properties. 
+This keeps the logic grouped in one location.
 """
 
 
@@ -24,18 +24,18 @@ func unhandled_input(event: InputEvent) -> void:
 func physics_process(delta: float) -> void:
 	var input_direction: = get_input_direction()
 
-	#The basis holds the (right, up, and -forwards) vectors of our camera.
-	#Multiplied by our input and summed together gets us a final direction vector relative to the camera
+	# Calculate a move direction vector relative to the camera
+	# The basis stores the (right, up, -forwards) vectors of our camera.
 	var forwards: Vector3 = owner.camera.global_transform.basis.z * input_direction.z
 	var right: Vector3 = owner.camera.global_transform.basis.x * input_direction.x
 	var move_direction: = (forwards + right).normalized()
 	move_direction.y = 0
 	
-	#Rotation
+	# Rotation
 	if move_direction:
 		owner.look_at(owner.global_transform.origin + move_direction, Vector3.UP)
 	
-	#Movement
+	# Movement
 	var new_velocity = calculate_velocity(velocity, max_speed, move_speed, delta, move_direction)
 	if new_velocity.y == 0:
 		new_velocity.y = -0.01
@@ -43,14 +43,16 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
-	pass
+	return
 
 
 func exit() -> void:
-	pass
+	return
 
 
-func on_Camera_aim_fired(target_vector: Vector3) -> void:
+"""Callback to transition to the optional Zip state
+It only works if the Zip state node exists"""
+func _on_Camera_aim_fired(target_vector: Vector3) -> void:
 	_state_machine.transition_to("Move/Zip", { zip_target = target_vector })
 
 

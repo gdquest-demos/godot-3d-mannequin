@@ -1,6 +1,7 @@
 extends State
 """
-Logic state for when there is no movement input.
+State for when there is no movement input.
+Supports triggering jump after the player started to fall.
 """
 
 
