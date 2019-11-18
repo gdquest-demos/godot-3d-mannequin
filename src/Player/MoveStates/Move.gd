@@ -32,7 +32,8 @@ func physics_process(delta: float) -> void:
 	move_direction.y = 0
 	
 	#Rotation
-	owner.look_at(owner.global_transform.origin + move_direction, Vector3.UP)
+	if move_direction:
+		owner.look_at(owner.global_transform.origin + move_direction, Vector3.UP)
 	
 	#Movement
 	var new_velocity = calculate_velocity(velocity, max_speed, move_speed, delta, move_direction)
