@@ -58,7 +58,7 @@ In addition, the Aim state allows some finer-tuned changes, like whether the aim
 
 While the scenes can be modified extensively with new nodes and raw code, the state machine model allow for some simple, new functionality with relative ease.
 
-As an example, there is the `Extensions` folder which contains additional player states for using the aiming view to fire a hookshot that pulls you towards the reticle. Once those states have been added to the Player's `Move` state, you only need to replace the `pass` in Move's `enter` with code like `owner.camera.connect("aim_fired", self, "on_Camera_aim_fired")` and Move's `exit` with code like `owner.camera.disconnect("aim_fired", self, "on_Camera_aim_fired")`
+As an example, there is the `Extensions` folder which contains additional player states for using the aiming view to fire a hookshot that pulls you towards the reticle. Once those states have been added to the Player's `Move` state, you only need to replace the return statement in Move's `enter` with code like `owner.camera.connect("aim_fired", self, "on_Camera_aim_fired")` and Move's `exit` with code like `owner.camera.disconnect("aim_fired", self, "on_Camera_aim_fired")`
 
 # Credits #
 

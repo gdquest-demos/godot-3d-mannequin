@@ -51,7 +51,8 @@ func exit() -> void:
 
 
 """Callback to transition to the optional Zip state
-It only works if the Zip state node exists"""
+It only works if the Zip state node exists.
+It is intended to work via signals"""
 func _on_Camera_aim_fired(target_vector: Vector3) -> void:
 	_state_machine.transition_to("Move/Zip", { zip_target = target_vector })
 
