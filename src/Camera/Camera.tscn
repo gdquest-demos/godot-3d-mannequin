@@ -7,7 +7,7 @@
 [ext_resource path="res://src/Camera/CameraStates/CameraDefault.gd" type="Script" id=5]
 [ext_resource path="res://src/Camera/CameraStates/Aim.gd" type="Script" id=6]
 
-[node name="CameraAnchor" type="Spatial"]
+[node name="Camera" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="SpringArm" type="SpringArm" parent="."]
@@ -29,7 +29,7 @@ texture = ExtResource( 2 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
-initial_state = NodePath("../../CameraAnchor/StateMachine/Camera/Default")
+initial_state = NodePath("Camera/Default")
 
 [node name="Camera" type="Node" parent="StateMachine"]
 script = ExtResource( 4 )

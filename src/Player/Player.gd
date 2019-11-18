@@ -1,3 +1,4 @@
+tool
 extends KinematicBody
 class_name Player
 """
@@ -6,9 +7,8 @@ camera and its orientation.
 """
 
 
-var camera: Spatial
+onready var camera: Spatial = $Camera
 
 
-func _ready() -> void:
-	camera = get_tree().root.find_node("CameraAnchor", true, false)
-	assert(camera)
+func _get_configuration_warning() -> String:
+	return "Missing camera node" if not camera else ""
