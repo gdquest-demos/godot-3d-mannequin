@@ -1,4 +1,8 @@
 extends State
+"""
+State for when there is no movement input.
+Supports triggering jump after the player started to fall.
+"""
 
 
 onready var jump_delay: Timer = $JumpDelay

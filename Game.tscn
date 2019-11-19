@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://src/Camera/Camera.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 1, 0.537255, 0.8, 1 )
@@ -37,6 +36,7 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="TestMap/Ground"]
+editor/display_folded = true
 
 [node name="CollisionShape" type="CollisionShape" parent="TestMap/Ground/StaticBody"]
 shape = SubResource( 3 )
@@ -169,7 +169,4 @@ shape = SubResource( 8 )
 transform = Transform( 0.766044, 0.166366, -0.620885, 0.271654, 0.791635, 0.547283, 0.582563, -0.587909, 0.561234, 0, 12, 0 )
 shadow_enabled = true
 
-[node name="Camera" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." instance=ExtResource( 1 )]

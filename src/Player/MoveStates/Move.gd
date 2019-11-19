@@ -1,4 +1,11 @@
 extends State
+"""
+Parent state for all movement-related states for the Player.
+
+Holds all of the base movement logic. 
+Child states can override this state's functions or change its properties. 
+This keeps the logic grouped in one location.
+"""
 
 
 export var max_speed: = Vector3(50.0, 50.0, 500.0)
@@ -17,17 +24,18 @@ func unhandled_input(event: InputEvent) -> void:
 func physics_process(delta: float) -> void:
 	var input_direction: = get_input_direction()
 
-	#The basis holds the (right, up, and -forwards) vectors of our camera.
-	#Multiplied by our input and summed together gets us a final direction vector relative to the camera
+	# Calculate a move direction vector relative to the camera
+	# The basis stores the (right, up, -forwards) vectors of our camera.
 	var forwards: Vector3 = owner.camera.global_transform.basis.z * input_direction.z
 	var right: Vector3 = owner.camera.global_transform.basis.x * input_direction.x
 	var move_direction: = (forwards + right).normalized()
 	move_direction.y = 0
 	
-	#Rotation
-	owner.look_at(owner.global_transform.origin + move_direction, Vector3.UP)
+	# Rotation
+	if move_direction:
+		owner.look_at(owner.global_transform.origin + move_direction, Vector3.UP)
 	
-	#Movement
+	# Movement
 	var new_velocity = calculate_velocity(velocity, max_speed, move_speed, delta, move_direction)
 	if new_velocity.y == 0:
 		new_velocity.y = -0.01
@@ -35,14 +43,17 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
-	owner.camera.connect("aim_fired", self, "on_Camera_aim_fired")
+	return
 
 
 func exit() -> void:
-	owner.camera.disconnect("aim_fired", self, "on_Camera_aim_fired")
+	return
 
 
-func on_Camera_aim_fired(target_vector: Vector3) -> void:
+"""Callback to transition to the optional Zip state
+It only works if the Zip state node exists.
+It is intended to work via signals"""
+func _on_Camera_aim_fired(target_vector: Vector3) -> void:
 	_state_machine.transition_to("Move/Zip", { zip_target = target_vector })
 
 

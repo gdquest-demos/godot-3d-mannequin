@@ -1,11 +1,19 @@
 extends State
+"""
+Parent state for all camera based states for the Camera. Handles input based on
+mouse/gamepad and movement and configuration based on which state we're using.
+
+This state holds all of the main logic, with the state itself being configured
+or have its functions overriden or called by the child states. This keeps the
+logic contained in a central location while being easily modifiable.
+"""
 
 
-onready var camera: Camera = owner.get_node("Camera")
+onready var camera: SpringArm = owner.get_node("SpringArm")
+onready var camera_view: Camera = camera.get_node("Camera")
 onready var initial_position: = camera.translation
 onready var initial_anchor_position: Vector3 = owner.translation
 
-onready var occlusion_ray: RayCast = owner.get_node("OcclusionRay")
 onready var aim_target: Sprite3D = owner.get_node("AimTarget")
 
 export var default_fov: = 70.0
@@ -22,7 +30,6 @@ var _is_aiming: = false
 
 
 func _ready():
-	occlusion_ray.set_cast_to(initial_position)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
@@ -58,18 +65,10 @@ func physics_process(delta: float) -> void:
 	elif owner.rotation.y < -PI:
 		owner.rotation.y += 2 * PI
 
-	if camera.fov != _current_fov:
-		camera.fov = lerp(camera.fov, _current_fov, 0.05)
+	if camera_view.fov != _current_fov:
+		camera_view.fov = lerp(camera_view.fov, _current_fov, 0.05)
 
-	# If there is a body between the camera and the player, move the camera closer
-	occlusion_ray.force_raycast_update()
-	if occlusion_ray.is_colliding():
-		var global_offset = camera.global_transform
-		if global_offset.origin != occlusion_ray.get_collision_point() + _offset:
-			global_offset.origin = occlusion_ray.get_collision_point() + _offset
-			camera.global_transform = global_offset
-	elif camera.translation != initial_position + _offset:
-		camera.translation = lerp(camera.translation, initial_position + _offset, 0.05)
+	camera.translation = lerp(camera.translation, initial_position + _offset, 0.05)
 
 
 func enter(msg: Dictionary = {}) ->void:
