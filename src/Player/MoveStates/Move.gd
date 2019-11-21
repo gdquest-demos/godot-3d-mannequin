@@ -11,14 +11,16 @@ This keeps the logic grouped in one location.
 export var max_speed: = Vector3(50.0, 50.0, 500.0)
 export var move_speed: = Vector3(500, 500, 500)
 export var max_rotation_speed: = 0.5
+export var gravity = -200.0
+export var jump_impulse = 40
 
 var velocity: = Vector3.ZERO
-var jump_velocity = Vector3(0, 20, 0)
+
 
 
 func unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
-		_state_machine.transition_to("Move/Air", { velocity = velocity + jump_velocity })
+		_state_machine.transition_to("Move/Air", { velocity = velocity, jump_impulse = jump_impulse })
 
 
 func physics_process(delta: float) -> void:
@@ -36,10 +38,8 @@ func physics_process(delta: float) -> void:
 		owner.look_at(owner.global_transform.origin + move_direction, Vector3.UP)
 	
 	# Movement
-	var new_velocity = calculate_velocity(velocity, max_speed, move_speed, delta, move_direction)
-	if new_velocity.y == 0:
-		new_velocity.y = -0.01
-	owner.move_and_slide(new_velocity, Vector3.UP)
+	velocity = calculate_velocity(velocity, max_speed, move_speed, gravity, delta, move_direction)
+	velocity = owner.move_and_slide(velocity, Vector3.UP)
 
 
 func enter(msg: Dictionary = {}) -> void:
@@ -69,6 +69,7 @@ static func calculate_velocity(
 		old_velocity: Vector3,
 		max_speed: Vector3,
 		move_speed: Vector3,
+		gravity: float,
 		delta: float,
 		move_direction: Vector3
 	) -> Vector3:
@@ -77,9 +78,9 @@ static func calculate_velocity(
 		if move_direction.length() > 1:
 			move_direction = move_direction.normalized()
 
-		new_velocity += move_direction * delta * move_speed
+		new_velocity = move_direction * delta * move_speed
 		if new_velocity.length() > max_speed.z:
 			new_velocity = new_velocity.normalized() * max_speed.z
-		new_velocity.y = old_velocity.y
+		new_velocity.y = old_velocity.y + gravity * delta
 
 		return new_velocity

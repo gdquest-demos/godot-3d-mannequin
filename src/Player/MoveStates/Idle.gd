@@ -14,7 +14,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 func physics_process(delta: float) -> void:
 	_parent.physics_process(delta)
-	if owner.is_on_floor() and (_parent.get_input_direction().x or _parent.get_input_direction().z):
+	if owner.is_on_floor() and _parent.get_input_direction().length() > 0.01:
 		_state_machine.transition_to("Move/Run")
 	elif not owner.is_on_floor():
 		_state_machine.transition_to("Move/Air")
