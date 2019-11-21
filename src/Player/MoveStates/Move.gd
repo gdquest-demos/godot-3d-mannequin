@@ -11,8 +11,8 @@ This keeps the logic grouped in one location.
 export var max_speed: = Vector3(50.0, 50.0, 500.0)
 export var move_speed: = Vector3(500, 500, 500)
 export var max_rotation_speed: = 0.5
-export var gravity = -200.0
-export var jump_impulse = 40
+export var gravity = -80.0
+export var jump_impulse = 25
 
 var velocity: = Vector3.ZERO
 

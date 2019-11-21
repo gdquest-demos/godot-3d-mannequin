@@ -9,12 +9,12 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func physics_process(delta: float) -> void:
+	_parent.physics_process(delta)
 	if owner.is_on_floor() or owner.is_on_wall():
 		if _parent.velocity.length() < 0.001:
 			_state_machine.transition_to("Move/Idle")
 	else:
 		_state_machine.transition_to("Move/Air")
-	_parent.physics_process(delta)
 
 
 
