@@ -126,6 +126,12 @@ y_inversion_toggle={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="world"
+
 [rendering]
 
+quality/filters/msaa=3
 environment/default_environment="res://default_env.tres"

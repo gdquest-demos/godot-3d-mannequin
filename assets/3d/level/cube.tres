@@ -1,0 +1,6 @@
+[gd_resource type="CubeMesh" load_steps=2 format=2]
+
+[ext_resource path="res://assets/3d/materials/obstacle.tres" type="Material" id=1]
+
+[resource]
+material = ExtResource( 1 )
