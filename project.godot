@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "CameraRig",
 "language": "GDScript",
-"path": "res://src/Camera/Camera.gd"
+"path": "res://src/Player/Camera/Camera.gd"
 }, {
 "base": "KinematicBody",
 "class": "Player",
@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="3D Third-Person Open Mannequin"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://src/Main/Game.tscn"
 config/icon="res://icon.png"
 
 [display]

@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/Camera/Camera.gd" type="Script" id=1]
-[ext_resource path="res://assets/2d/reticle.png" type="Texture" id=2]
-[ext_resource path="res://src/Main/StateMachine/StateMachine.gd" type="Script" id=3]
-[ext_resource path="res://src/Camera/CameraStates/Camera.gd" type="Script" id=4]
-[ext_resource path="res://src/Camera/CameraStates/CameraDefault.gd" type="Script" id=5]
-[ext_resource path="res://src/Camera/CameraStates/Aim.gd" type="Script" id=6]
-[ext_resource path="res://src/Camera/AimTarget.gd" type="Script" id=7]
+[ext_resource path="res://src/Player/Camera/Camera.gd" type="Script" id=1]
+[ext_resource path="res://src/Player/Camera/AimTarget.gd" type="Script" id=2]
+[ext_resource path="res://src/Player/Camera/States/Default.gd" type="Script" id=3]
+[ext_resource path="res://src/Main/StateMachine/StateMachine.gd" type="Script" id=4]
+[ext_resource path="res://assets/2d/reticle.png" type="Texture" id=5]
+[ext_resource path="res://src/Player/Camera/States/Camera.gd" type="Script" id=6]
+[ext_resource path="res://src/Player/Camera/States/Aim.gd" type="Script" id=7]
 
 [node name="Camera" type="Spatial"]
 script = ExtResource( 1 )
@@ -35,18 +35,18 @@ collision_mask = 2
 [node name="AimTarget" type="Sprite3D" parent="."]
 visible = false
 pixel_size = 0.001
-texture = ExtResource( 2 )
-script = ExtResource( 7 )
+texture = ExtResource( 5 )
+script = ExtResource( 2 )
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 initial_state = NodePath("Camera/Default")
 
 [node name="Camera" type="Node" parent="StateMachine"]
-script = ExtResource( 4 )
+script = ExtResource( 6 )
 
 [node name="Default" type="Node" parent="StateMachine/Camera"]
-script = ExtResource( 5 )
+script = ExtResource( 3 )
 
 [node name="Aim" type="Node" parent="StateMachine/Camera"]
-script = ExtResource( 6 )
+script = ExtResource( 7 )
