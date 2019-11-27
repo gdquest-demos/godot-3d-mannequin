@@ -44,7 +44,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="3D TPS Character Controller"
+config/name="3D Third-Person Open Mannequin"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
