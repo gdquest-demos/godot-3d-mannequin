@@ -24,7 +24,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 func physics_process(delta: float) -> void:
 	_parent.physics_process(delta)
-	_parent.update_aim_target()
+	_parent.aim_target.update(owner.aim_ray)
 
 
 func enter(msg: Dictionary = {}) -> void:

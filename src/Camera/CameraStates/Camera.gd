@@ -58,23 +58,6 @@ func enter(msg: Dictionary = {}) ->void:
 	_is_aiming = msg["is_aiming"] if "is_aiming" in msg else false
 
 
-func update_aim_target() -> void:
-	var ray: RayCast = owner.aim_ray
-	ray.force_raycast_update()
-
-	if ray.is_colliding():
-		var global_offset = aim_target.global_transform
-
-		if global_offset.origin != ray.get_collision_point():
-			global_offset.origin = ray.get_collision_point()
-			aim_target.global_transform = global_offset
-			aim_target.look_at(ray.get_collision_point() - ray.get_collision_normal(), global_offset.basis.y.normalized())
-
-		aim_target.visible = true
-	else:
-		aim_target.visible = false
-
-
 func auto_rotate(move_direction: Vector3) -> void:
 	var offset: float = owner.player.rotation.y - owner.rotation.y
 	var target_angle: float = (
