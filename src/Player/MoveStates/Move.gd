@@ -8,6 +8,9 @@ This keeps the logic grouped in one location.
 """
 
 
+signal direction_changed(move_direction)
+
+
 export var max_speed: = Vector3(50.0, 50.0, 500.0)
 export var move_speed: = Vector3(500, 500, 500)
 export var max_rotation_speed: = 0.5
@@ -15,7 +18,6 @@ export var gravity = -80.0
 export var jump_impulse = 25
 
 var velocity: = Vector3.ZERO
-
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -30,8 +32,11 @@ func physics_process(delta: float) -> void:
 	# The basis stores the (right, up, -forwards) vectors of our camera.
 	var forwards: Vector3 = owner.camera.global_transform.basis.z * input_direction.z
 	var right: Vector3 = owner.camera.global_transform.basis.x * input_direction.x
-	var move_direction: = (forwards + right).normalized()
+	var move_direction: = forwards + right
+	if move_direction.length() > 1.0:
+		move_direction = move_direction.normalized()
 	move_direction.y = 0
+	emit_signal("direction_changed", move_direction)
 	
 	# Rotation
 	if move_direction:
