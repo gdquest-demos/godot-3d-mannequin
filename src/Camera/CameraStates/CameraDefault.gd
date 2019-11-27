@@ -17,4 +17,3 @@ func physics_process(delta: float) -> void:
 
 func enter(msg: Dictionary = {}) -> void:
 	_parent.enter(msg)
-	

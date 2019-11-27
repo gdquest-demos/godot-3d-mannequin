@@ -11,11 +11,11 @@ signal aim_fired(target_vector)
 
 onready var camera: InterpolatedCamera = $InterpolatedCamera
 onready var spring_arm: SpringArm = $SpringArm
-onready var camera_state: State = $StateMachine/Camera
 onready var aim_ray: RayCast = $AimRay
 
 var player: KinematicBody
 
+onready var _position_start: Vector3 = translation
 
 func _ready() -> void:
 	set_as_toplevel(true)

@@ -5,10 +5,9 @@ the field of view, position offset (over the shoulder), etc.
 """
 
 
-export var first_person_aiming: bool = false
+export var is_first_person: bool = false
 export var fov: = 40.0
-export var is_y_inverted: = true
-export var third_person_camera_offset: = Vector3(0.75, 0.0, 0)
+export var offset_third_person: = Vector3(0.75, -0.7, 0)
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -16,8 +15,8 @@ func unhandled_input(event: InputEvent) -> void:
 		_state_machine.transition_to("Camera/Default")
 	elif event.is_action_pressed("action"):
 		_state_machine.transition_to("Camera/Default")
-		owner.emit_signal("aim_fired", 
-				owner.aim_ray.get_collision_point() if owner.aim_ray.is_colliding() 
+		owner.emit_signal("aim_fired",
+				owner.aim_ray.get_collision_point() if owner.aim_ray.is_colliding()
 				else owner.get_global_transform().origin)
 	else:
 		_parent.unhandled_input(event)
@@ -29,18 +28,17 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
-	if first_person_aiming:
+	if is_first_person:
 		_parent.occlusion_ray.set_cast_to(Vector3(0, 0, 0))
 		msg["offset"] = -_parent.initial_position - Vector3(0.0, 0, 0.5)
 	else:
 		msg["fov"] = fov
-		msg["offset"] = third_person_camera_offset
-	msg["aiming"] = true
-	msg["y_invert"] = is_y_inverted
+		msg["offset"] = offset_third_person
+	msg["is_aiming"] = true
 	_parent.enter(msg)
 
 
 func exit() -> void:
 	_parent.aim_target.visible = false
-	if first_person_aiming:
+	if is_first_person:
 		_parent.occlusion_ray.set_cast_to(_parent.initial_position)
