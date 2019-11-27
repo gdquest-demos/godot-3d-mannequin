@@ -1,5 +1,6 @@
 tool
 extends Spatial
+class_name CameraRig
 """
 Simple accessor class to let the nodes in the Camera scene access the player
 or some frequently used nodes in the scene itself caching the call to get_node

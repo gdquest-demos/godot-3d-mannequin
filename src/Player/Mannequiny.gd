@@ -1,6 +1,7 @@
 extends Spatial
+class_name SkinMannequiny
 """
-Simple helper class that controls the animation tree transitions for the rig.
+Controls the animation tree's transitions for this animated character.
 
 It has a signal connected to the player state machine, and uses the resulting
 state names to translate them into the states for the animation tree.

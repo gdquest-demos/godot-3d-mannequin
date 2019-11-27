@@ -7,7 +7,8 @@ camera and its orientation.
 """
 
 
-onready var camera: Spatial = $Camera
+onready var camera: CameraRig = $Camera
+onready var skin: SkinMannequiny = $Mannequiny
 
 
 func _get_configuration_warning() -> String:
