@@ -10,14 +10,21 @@
 [node name="Camera" type="Spatial"]
 script = ExtResource( 1 )
 
+[node name="InterpolatedCamera" type="InterpolatedCamera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.87462, 0.48481, 0, -0.48481, 0.87462, 0, 0.5, 0.5 )
+current = true
+target = NodePath("../SpringArm/CameraTarget")
+speed = 10.0
+enabled = true
+
 [node name="SpringArm" type="SpringArm" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.87462, 0.48481, 0, -0.48481, 0.87462, 0, 0.5, 0.5 )
 collision_mask = 2
 spring_length = 5.0
 margin = 0.5
 
-[node name="Camera" type="Camera" parent="SpringArm"]
-current = true
+[node name="CameraTarget" type="Position3D" parent="SpringArm"]
+transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
 
 [node name="AimRay" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0 )

@@ -9,12 +9,9 @@ logic contained in a central location while being easily modifiable.
 """
 
 
-onready var camera: SpringArm = owner.get_node("SpringArm")
-onready var camera_view: Camera = camera.get_node("Camera")
-onready var initial_position: = camera.translation
-onready var initial_anchor_position: Vector3 = owner.translation
-
 onready var aim_target: Sprite3D = owner.get_node("AimTarget")
+
+onready var _initial_anchor_position: Vector3 = owner.translation
 
 export var default_fov: = 70.0
 export var is_y_inverted: = true
@@ -22,6 +19,7 @@ export var backwards_deadzone := 0.3
 export var gamepad_sensivity: = Vector2(2.5, 2.5)
 export var mouse_sensitivity := Vector2(0.1, 0.1)
 
+var _initial_position: = Vector3.ZERO
 var _current_fov: float = default_fov
 var _current_y_inversion: bool = is_y_inverted
 var _relative_input: = Vector2(0, 0)
@@ -31,13 +29,15 @@ var _is_aiming: = false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	yield(owner, "ready")
+	_initial_position = owner.spring_arm.translation
 
 
 func physics_process(delta: float) -> void:
 	#pin camera to player position relative to old position
 	var current_transform: Transform = owner.global_transform
-	var current_position: = current_transform.origin
-	var intended_position: Vector3 = owner.player.global_transform.origin + initial_anchor_position
+	# var current_position: = current_transform.origin
+	var intended_position: Vector3 = owner.player.global_transform.origin + _initial_anchor_position
 	current_transform.origin = intended_position
 	owner.global_transform = current_transform
 	
@@ -65,10 +65,10 @@ func physics_process(delta: float) -> void:
 	elif owner.rotation.y < -PI:
 		owner.rotation.y += 2 * PI
 
-	if camera_view.fov != _current_fov:
-		camera_view.fov = lerp(camera_view.fov, _current_fov, 0.05)
+	if owner.camera.fov != _current_fov:
+		owner.camera.fov = lerp(owner.camera.fov, _current_fov, 0.05)
 
-	camera.translation = lerp(camera.translation, initial_position + _offset, 0.05)
+	owner.spring_arm.translation = lerp(owner.spring_arm.translation, _initial_position + _offset, 0.05)
 
 
 func enter(msg: Dictionary = {}) ->void:
