@@ -10,8 +10,9 @@ func update(ray: RayCast) -> void:
 
 	if ray.is_colliding():
 		var collision_point: = ray.get_collision_point()
-		global_transform.origin = collision_point
-		look_at(collision_point - ray.get_collision_normal(), global_transform.basis.y.normalized())
+		var collision_normal: = ray.get_collision_normal()
+		global_transform.origin = collision_point + collision_normal * 0.01
+		look_at(collision_point - collision_normal, global_transform.basis.y.normalized())
 		visible = true
 	else:
 		visible = false
