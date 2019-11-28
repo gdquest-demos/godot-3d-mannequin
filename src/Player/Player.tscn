@@ -21,6 +21,22 @@ script = ExtResource( 1 )
 [node name="Mannequiny" parent="." instance=ExtResource( 2 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0.222992 )
 
+[node name="SoftBody" parent="Mannequiny/root/Skeleton/BoneAttachment" index="0"]
+attachments/0/offset = Vector3( 0.107858, -0.0247673, -0.0570511 )
+attachments/1/offset = Vector3( 0.0903334, 0.00472879, -0.0183052 )
+attachments/2/offset = Vector3( 0.120941, -0.00599694, -0.0127253 )
+attachments/3/offset = Vector3( 0.0536616, -0.0451374, -0.0818127 )
+attachments/4/offset = Vector3( 0.0799804, -0.0073725, -0.0497236 )
+attachments/5/offset = Vector3( -0.00280421, -0.0538799, -0.088824 )
+attachments/6/offset = Vector3( -0.0494764, -0.026634, -0.0728708 )
+attachments/7/offset = Vector3( -0.0591641, -0.0443373, -0.0820072 )
+attachments/8/offset = Vector3( -0.0953435, 0.00604582, -0.0186251 )
+attachments/9/offset = Vector3( -0.126119, -0.00424457, -0.013151 )
+attachments/10/offset = Vector3( -0.0850551, -0.00620186, -0.0500079 )
+attachments/11/offset = Vector3( 0.0441945, -0.0272985, -0.0727094 )
+attachments/12/offset = Vector3( -0.00267458, -0.0335506, -0.080376 )
+attachments/13/offset = Vector3( -0.113151, -0.0231997, -0.0574319 )
+
 [node name="AnimationTree" parent="Mannequiny" index="2"]
 parameters/playback = SubResource( 1 )
 
