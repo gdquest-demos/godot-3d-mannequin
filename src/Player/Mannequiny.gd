@@ -8,47 +8,38 @@ state names to translate them into the states for the animation tree.
 """
 
 
+enum States {IDLE, RUN, AIR, LAND}
+
 onready var animation_tree: AnimationTree = $AnimationTree
-
-var player_direction: = Vector3.ZERO
-
 onready var _playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
+
+var move_direction: = Vector3.ZERO setget set_move_direction
+var is_moving: = false setget set_is_moving
 
 
 func _ready() -> void:
 	animation_tree.active = true
 
 
-func _on_StateMachine_transitioned(state_name) -> void:
-	_change_animation(state_name)
+func set_move_direction(direction: Vector3) -> void:
+	move_direction = direction
+	animation_tree["parameters/move_ground/blend_position"] = direction.length()
 
 
-func _physics_process(delta: float) -> void:
-	match _playback.get_current_node():
-		"move_ground":
-			animation_tree["parameters/move_ground/blend_position"] = player_direction.length()
-	
+func set_is_moving(value: bool) -> void:
+	is_moving = value
+	animation_tree["parameters/conditions/is_moving"] = value
 
 
-"""
-Callback to automatically change the animation when the 
-player changes state.
-"""
-func _change_animation(state_name: String) -> void:
-	var node: = state_name.split("/")[-1].to_lower()
-	match node:
-		"idle":
+func transition_to(state_id: int) -> void:
+	match state_id:
+		States.IDLE:
 			_playback.travel("idle")
-			animation_tree["parameters/conditions/is_moving"] = false
-		"run":
+		States.LAND:
+			_playback.travel("land")
+		States.RUN:
 			_playback.travel("move_ground")
-			animation_tree["parameters/conditions/is_moving"] = true
-		"air":
+		States.AIR:
 			_playback.travel("jump")
-			animation_tree["parameters/conditions/is_moving"] = true
 		_:
 			_playback.travel("idle")
-
-
-func _on_Move_direction_changed(move_direction) -> void:
-	player_direction = move_direction

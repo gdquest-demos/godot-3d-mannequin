@@ -51,7 +51,5 @@ script = ExtResource( 7 )
 
 [node name="Camera" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38644, 0 )
-[connection signal="transitioned" from="StateMachine" to="Mannequiny" method="_on_StateMachine_transitioned"]
-[connection signal="direction_changed" from="StateMachine/Move" to="Mannequiny" method="_on_Move_direction_changed"]
 
 [editable path="Mannequiny"]
