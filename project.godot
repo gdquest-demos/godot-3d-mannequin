@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Player/Camera/CameraRig.gd"
 }, {
+"base": "Spatial",
+"class": "Mannequiny",
+"language": "GDScript",
+"path": "res://src/Player/Mannequiny.gd"
+}, {
 "base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
@@ -23,11 +28,6 @@ _global_script_classes=[ {
 "class": "PlayerState",
 "language": "GDScript",
 "path": "res://src/Player/PlayerState.gd"
-}, {
-"base": "Spatial",
-"class": "SkinMannequiny",
-"language": "GDScript",
-"path": "res://src/Player/Mannequiny.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -41,9 +41,9 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "CameraRig": "",
+"Mannequiny": "",
 "Player": "",
 "PlayerState": "",
-"SkinMannequiny": "",
 "State": "",
 "StateMachine": ""
 }

@@ -1,5 +1,5 @@
 extends Spatial
-class_name SkinMannequiny
+class_name Mannequiny
 """
 Controls the animation tree's transitions for this animated character.
 

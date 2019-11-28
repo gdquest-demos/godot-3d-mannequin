@@ -3,7 +3,7 @@ class_name PlayerState
 
 
 var player: Player
-var skin: SkinMannequiny
+var skin: Mannequiny
 
 
 func _ready() -> void:
