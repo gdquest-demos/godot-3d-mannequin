@@ -39,10 +39,6 @@ gravity = -100.0
 [node name="Idle" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 5 )
 
-[node name="JumpDelay" type="Timer" parent="StateMachine/Move/Idle"]
-wait_time = 0.1
-one_shot = true
-
 [node name="Air" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 6 )
 
