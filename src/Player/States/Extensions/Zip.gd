@@ -1,4 +1,4 @@
-extends State
+extends PlayerState
 """
 Hookshot style state for the player - gets a destination from an outside
 piece of logic (in this case, the Camera's aim state firing with a raycast)
@@ -16,14 +16,14 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func physics_process(delta: float) -> void:
-	var zipdest = zip_target - owner.get_global_transform().origin + Vector3(0, -1.6, 0)
-	var aiming_length: float = (owner.camera.aim_ray.cast_to.length() - zip_target.length() + 1)
+	var zipdest = zip_target - player.get_global_transform().origin + Vector3(0, -1.6, 0)
+	var aiming_length: float = (player.camera.aim_ray.cast_to.length() - zip_target.length() + 1)
 	
 	_parent.velocity += zipdest.normalized() * delta * aiming_length * zip_speed
 	
 	_parent.physics_process(delta)
 	
-	if owner.get_slide_count() > 0:
+	if player.get_slide_count() > 0:
 		if Input.is_action_pressed("action"):
 			_parent.velocity = Vector3(0, 0, 0)
 			_state_machine.transition_to("Move/Hang")

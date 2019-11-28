@@ -1,4 +1,4 @@
-extends State
+extends PlayerState
 """
 State that does not involve gravity or further movement until released.
 """

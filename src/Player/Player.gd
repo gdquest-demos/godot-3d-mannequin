@@ -9,6 +9,7 @@ camera and its orientation.
 
 onready var camera: CameraRig = $Camera
 onready var skin: SkinMannequiny = $Mannequiny
+onready var state_machine: StateMachine = $StateMachine
 
 
 func _get_configuration_warning() -> String:

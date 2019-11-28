@@ -1,4 +1,4 @@
-extends State
+extends PlayerState
 """
 Parent state for all movement-related states for the Player.
 
@@ -30,8 +30,8 @@ func physics_process(delta: float) -> void:
 
 	# Calculate a move direction vector relative to the camera
 	# The basis stores the (right, up, -forwards) vectors of our camera.
-	var forwards: Vector3 = owner.camera.global_transform.basis.z * input_direction.z
-	var right: Vector3 = owner.camera.global_transform.basis.x * input_direction.x
+	var forwards: Vector3 = player.camera.global_transform.basis.z * input_direction.z
+	var right: Vector3 = player.camera.global_transform.basis.x * input_direction.x
 	var move_direction: = forwards + right
 	if move_direction.length() > 1.0:
 		move_direction = move_direction.normalized()
@@ -40,11 +40,11 @@ func physics_process(delta: float) -> void:
 	
 	# Rotation
 	if move_direction:
-		owner.look_at(owner.global_transform.origin + move_direction, Vector3.UP)
+		player.look_at(player.global_transform.origin + move_direction, Vector3.UP)
 	
 	# Movement
 	velocity = calculate_velocity(velocity, max_speed, move_speed, gravity, delta, move_direction)
-	velocity = owner.move_and_slide(velocity, Vector3.UP)
+	velocity = player.move_and_slide(velocity, Vector3.UP)
 
 
 func enter(msg: Dictionary = {}) -> void:
