@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "CameraRig",
 "language": "GDScript",
-"path": "res://src/Player/Camera/Camera.gd"
+"path": "res://src/Player/Camera/CameraRig.gd"
 }, {
 "base": "KinematicBody",
 "class": "Player",

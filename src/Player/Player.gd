@@ -7,7 +7,7 @@ camera and its orientation.
 """
 
 
-onready var camera: CameraRig = $Camera
+onready var camera: CameraRig = $CameraRig
 onready var skin: SkinMannequiny = $Mannequiny
 onready var state_machine: StateMachine = $StateMachine
 

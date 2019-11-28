@@ -5,7 +5,7 @@
     - [Controls](#controls)
 - [How it works](#how-it-works)
     - [Player](#player)
-    - [Camera](#camera)
+    - [CameraRig](#camera)
 - [Configuration](#configuration)
 - [Customization](#customization)
 - [Credits](#credits)
@@ -23,8 +23,8 @@ This is a third person character controller designed to work both with the keybo
 
 The 3D Third Person Character Controller is made of two scenes:
 
-* `Camera.tscn` - A 3D camera rig with a state machine for aiming
-* `Player.tscn` - A `KinematicBody` with a state machine for player movement. Contains an instance of `Camera`. It also includes the animated 3D mannequin.
+* `CameraRig.tscn` - A 3D camera rig with a state machine for aiming
+* `Player.tscn` - A `KinematicBody` with a state machine for player movement. Contains an instance of `CameraRig`. It also includes the animated 3D mannequin.
 
 To use the default character, instance `Player` in your game. See `Game.tscn` for an example. In this demo, the obstacles are mesh instances with static body collisions making up a cube world.
 
@@ -40,9 +40,9 @@ The scene that deals with the movement, collision, and logic of the player. The 
 
 The scene also holds an instance of the `PlayerMesh` for animation purposes. This scene lives in the `PlayerMesh.tscn` scene. It holds the skeletal rig for the mesh's animation, the 3D model of the body and head sepearately, and the animation tree and player to control the animation workflow of the model. The lot is wrapped up in a spatial node with some logic to transition to which animation based on which state the player is in.
 
-## Camera ##
+## CameraRig ##
 
-The scene that deals with the Camera movement. It follows the Player in the game, but in code it moves and rotates separately from it. It has a `SpringArm` node to help with preventing collision with level geometry - moving the viewpoint forwards to prevent moving the camera inside geometry. It also has a system that holds the raycast for aiming-mode, and the 3D sprite that is a projected reticule. The logic is held in a finite state machine.
+The scene that deals with the CameraRig movement. It follows the Player in the game, but in code it moves and rotates separately from it. It has a `SpringArm` node to help with preventing collision with level geometry - moving the viewpoint forwards to prevent moving the camera inside geometry. It also has a system that holds the raycast for aiming-mode, and the 3D sprite that is a projected reticule. The logic is held in a finite state machine.
 
 # Configuration #
 
@@ -50,7 +50,7 @@ To change the player and the camera's behavior, you need to change properties on
 
 Most of the configuration available for player movement are located on the `Move` state in the Player scene - the player speed and the rotational speed.
 
-The Camera has more options. On the main Camera state in the Camera scene are items like the default field of view, whether Y is inverted, and sensitivity.
+The CameraRig has more options. On the main CameraRig state in the CameraRig scene are items like the default field of view, whether Y is inverted, and sensitivity.
 
 In addition, the Aim state allows some finer-tuned changes, like whether the aiming camera is first or third person, and by how much it should be offset over-the-shoulder of the character.
 
