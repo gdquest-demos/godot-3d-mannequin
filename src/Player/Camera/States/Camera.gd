@@ -1,4 +1,4 @@
-extends State
+extends CameraState
 """
 Parent state for all camera based states for the Camera. Handles input based on
 mouse/gamepad and movement and configuration based on which state we're using.
@@ -9,7 +9,7 @@ logic contained in a central location while being easily modifiable.
 """
 
 
-onready var aim_target: Sprite3D = owner.get_node("AimTarget")
+onready var aim_target: Sprite3D
 
 export var is_y_inverted: = true
 export var fov_default: = 70.0
@@ -26,10 +26,11 @@ var _is_aiming: = false
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	yield(owner, "ready")
+	aim_target = camera_rig.aim_target
 
 
 func physics_process(delta: float) -> void:
-	owner.global_transform.origin = owner.player.global_transform.origin + owner._position_start
+	camera_rig.global_transform.origin = camera_rig.player.global_transform.origin + camera_rig._position_start
 
 	var look_direction: = get_look_direction()
 	var move_direction: = get_move_direction()
@@ -44,12 +45,12 @@ func physics_process(delta: float) -> void:
 	if not is_moving_towards_camera and not _is_aiming:
 		auto_rotate(move_direction)
 
-	owner.rotation.y = wrapf(owner.rotation.y, -PI, PI)
+	camera_rig.rotation.y = wrapf(camera_rig.rotation.y, -PI, PI)
 
-	if owner.camera.fov != _fov_current:
-		owner.camera.fov = lerp(owner.camera.fov, _fov_current, 0.05)
+	if camera_rig.camera.fov != _fov_current:
+		camera_rig.camera.fov = lerp(camera_rig.camera.fov, _fov_current, 0.05)
 
-	owner.spring_arm.translation = lerp(owner.spring_arm.translation, owner._position_start + _offset, 0.05)
+	camera_rig.spring_arm.translation = lerp(camera_rig.spring_arm.translation, camera_rig._position_start + _offset, 0.05)
 
 
 func enter(msg: Dictionary = {}) ->void:
@@ -59,13 +60,13 @@ func enter(msg: Dictionary = {}) ->void:
 
 
 func auto_rotate(move_direction: Vector3) -> void:
-	var offset: float = owner.player.rotation.y - owner.rotation.y
+	var offset: float = camera_rig.player.rotation.y - camera_rig.rotation.y
 	var target_angle: float = (
-		owner.player.rotation.y - 2 * PI if offset > PI
-		else owner.player.rotation.y + 2 * PI if offset < -PI
-		else owner.player.rotation.y
+		camera_rig.player.rotation.y - 2 * PI if offset > PI
+		else camera_rig.player.rotation.y + 2 * PI if offset < -PI
+		else camera_rig.player.rotation.y
 	)
-	owner.rotation.y = lerp(owner.rotation.y, target_angle, 0.015)
+	camera_rig.rotation.y = lerp(camera_rig.rotation.y, target_angle, 0.015)
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -83,12 +84,12 @@ func unhandled_input(event: InputEvent) -> void:
 
 func process_camera_input(input: Vector2) -> void:
 	if input.x != 0:
-		owner.rotation.y -= input.x
+		camera_rig.rotation.y -= input.x
 	if input.y != 0:
 		var angle: = input.y
-		owner.rotation.x -= angle * -1.0 if is_y_inverted else angle
-		owner.rotation.x = clamp(owner.rotation.x, -0.75, 1.25)
-		owner.rotation.z = 0
+		camera_rig.rotation.x -= angle * -1.0 if is_y_inverted else angle
+		camera_rig.rotation.x = clamp(camera_rig.rotation.x, -0.75, 1.25)
+		camera_rig.rotation.z = 0
 
 
 """

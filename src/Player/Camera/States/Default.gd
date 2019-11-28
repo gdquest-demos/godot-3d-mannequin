@@ -1,4 +1,4 @@
-extends State
+extends CameraState
 """
 Logic state for the camera - implies no modification to the camera settings.
 """

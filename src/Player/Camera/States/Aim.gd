@@ -1,4 +1,4 @@
-extends State
+extends CameraState
 """
 Logic state for the camera where configuration are made to the camera to set
 the field of view, position offset (over the shoulder), etc.
@@ -15,16 +15,16 @@ func unhandled_input(event: InputEvent) -> void:
 		_state_machine.transition_to("Camera/Default")
 	elif event.is_action_pressed("action"):
 		_state_machine.transition_to("Camera/Default")
-		owner.emit_signal("aim_fired",
-				owner.aim_ray.get_collision_point() if owner.aim_ray.is_colliding()
-				else owner.get_global_transform().origin)
+		camera_rig.emit_signal("aim_fired",
+				camera_rig.aim_ray.get_collision_point() if camera_rig.aim_ray.is_colliding()
+				else camera_rig.get_global_transform().origin)
 	else:
 		_parent.unhandled_input(event)
 
 
 func physics_process(delta: float) -> void:
 	_parent.physics_process(delta)
-	_parent.aim_target.update(owner.aim_ray)
+	_parent.aim_target.update(camera_rig.aim_ray)
 
 
 func enter(msg: Dictionary = {}) -> void:

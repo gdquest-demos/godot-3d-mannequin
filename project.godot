@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Player/Camera/CameraRig.gd"
 }, {
+"base": "State",
+"class": "CameraState",
+"language": "GDScript",
+"path": "res://src/Player/Camera/CameraState.gd"
+}, {
 "base": "Spatial",
 "class": "Mannequiny",
 "language": "GDScript",
@@ -41,6 +46,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "CameraRig": "",
+"CameraState": "",
 "Mannequiny": "",
 "Player": "",
 "PlayerState": "",
