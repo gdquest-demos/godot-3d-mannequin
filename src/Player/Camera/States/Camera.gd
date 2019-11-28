@@ -9,8 +9,6 @@ logic contained in a central location while being easily modifiable.
 """
 
 
-onready var aim_target: Sprite3D
-
 export var is_y_inverted: = true
 export var fov_default: = 70.0
 export var deadzone_backwards := 0.3
@@ -26,7 +24,6 @@ var _is_aiming: = false
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	yield(owner, "ready")
-	aim_target = camera_rig.aim_target
 
 
 func physics_process(delta: float) -> void:

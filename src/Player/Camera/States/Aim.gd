@@ -24,7 +24,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 func physics_process(delta: float) -> void:
 	_parent.physics_process(delta)
-	_parent.aim_target.update(camera_rig.aim_ray)
+	camera_rig.aim_target.update(camera_rig.aim_ray)
 
 
 func enter(msg: Dictionary = {}) -> void:
@@ -39,6 +39,6 @@ func enter(msg: Dictionary = {}) -> void:
 
 
 func exit() -> void:
-	_parent.aim_target.visible = false
+	camera_rig.aim_target.visible = false
 	if is_first_person:
 		_parent.occlusion_ray.set_cast_to(_parent.initial_position)
