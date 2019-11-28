@@ -22,7 +22,6 @@ var _is_aiming: = false
 
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	yield(owner, "ready")
 
 
@@ -67,16 +66,10 @@ func auto_rotate(move_direction: Vector3) -> void:
 
 
 func unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("mousegrab_toggle"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	elif event.is_action_pressed("y_inversion_toggle"):
-		is_y_inverted = !is_y_inverted
-	elif event is InputEventMouseMotion:
+	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			_input_relative += event.get_relative()
+			get_tree().set_input_as_handled()
 
 
 func process_camera_input(input: Vector2) -> void:
