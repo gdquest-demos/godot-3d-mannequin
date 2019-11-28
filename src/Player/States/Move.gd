@@ -8,9 +8,6 @@ This keeps the logic grouped in one location.
 """
 
 
-signal direction_changed(move_direction)
-
-
 export var max_speed: = Vector3(50.0, 50.0, 500.0)
 export var move_speed: = Vector3(500, 500, 500)
 export var max_rotation_speed: = 0.5
@@ -36,7 +33,7 @@ func physics_process(delta: float) -> void:
 	if move_direction.length() > 1.0:
 		move_direction = move_direction.normalized()
 	move_direction.y = 0
-	emit_signal("direction_changed", move_direction)
+	skin.move_direction = move_direction
 	
 	# Rotation
 	if move_direction:
