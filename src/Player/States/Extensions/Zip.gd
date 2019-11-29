@@ -7,7 +7,7 @@ and flies through the air to reach it.
 
 
 var zip_speed:= 10.0
-var zip_target: Vector3 = Vector3(0, 0, 0)
+var zip_target: Vector3 = Vector3.ZERO
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -28,7 +28,7 @@ func physics_process(delta: float) -> void:
 			_parent.velocity = Vector3.ZERO
 			_state_machine.transition_to("Move/Hang")
 		else:
-			_parent.velocity = Vector3(0, 0, 0)
+			_parent.velocity = Vector3.ZERO
 			_state_machine.transition_to("Move/Air")
 
 
@@ -40,4 +40,4 @@ func enter(msg: Dictionary = {}) -> void:
 
 
 func exit() -> void:
-	zip_target = Vector3(0, 0, 0)
+	zip_target = Vector3.ZERO
