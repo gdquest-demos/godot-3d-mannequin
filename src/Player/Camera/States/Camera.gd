@@ -19,10 +19,6 @@ var _input_relative: = Vector2.ZERO
 var _is_aiming: = false
 
 
-func _ready():
-	yield(owner, "ready")
-
-
 func physics_process(delta: float) -> void:
 	camera_rig.global_transform.origin = camera_rig.player.global_transform.origin + camera_rig._position_start
 
@@ -35,7 +31,9 @@ func physics_process(delta: float) -> void:
 	elif look_direction.length() > 0:
 		update_rotation(look_direction * sensitivity_gamepad * delta)
 
-	var is_moving_towards_camera: bool = move_direction.x >= -deadzone_backwards and move_direction.x <= deadzone_backwards
+	var is_moving_towards_camera: bool = (
+		move_direction.x >= -deadzone_backwards and move_direction.x <= deadzone_backwards
+	)
 	if not (is_moving_towards_camera or _is_aiming):
 		auto_rotate(move_direction)
 
@@ -53,10 +51,8 @@ func auto_rotate(move_direction: Vector3) -> void:
 
 
 func unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			_input_relative += event.get_relative()
-			get_tree().set_input_as_handled()
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		_input_relative += event.get_relative()
 
 
 func update_rotation(offset: Vector2) -> void:
@@ -81,7 +77,7 @@ Returns the move direction of the character controlled by the player
 """
 static func get_move_direction() -> Vector3:
 	return Vector3(
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-			0,
-			Input.get_action_strength("move_back") - Input.get_action_strength("move_front")
-		)
+		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+		0,
+		Input.get_action_strength("move_back") - Input.get_action_strength("move_front")
+	)
