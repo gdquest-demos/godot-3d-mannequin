@@ -11,7 +11,7 @@ var zip_target: Vector3 = Vector3(0, 0, 0)
 
 
 func unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("action"):
+	if event.is_action_pressed("interact"):
 		_state_machine.transition_to("Move/Idle")
 
 
@@ -24,8 +24,8 @@ func physics_process(delta: float) -> void:
 	_parent.physics_process(delta)
 	
 	if player.get_slide_count() > 0:
-		if Input.is_action_pressed("action"):
-			_parent.velocity = Vector3(0, 0, 0)
+		if Input.is_action_pressed("interact"):
+			_parent.velocity = Vector3.ZERO
 			_state_machine.transition_to("Move/Hang")
 		else:
 			_parent.velocity = Vector3(0, 0, 0)

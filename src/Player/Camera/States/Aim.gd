@@ -11,9 +11,10 @@ export var offset_third_person: = Vector3(0.75, -0.7, 0)
 
 
 func unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("aim_toggle"):
+	if event.is_action_pressed("toggle_aim"):
 		_state_machine.transition_to("Camera/Default")
-	elif event.is_action_pressed("action"):
+		get_tree().set_input_as_handled()
+	elif event.is_action_pressed("fire"):
 		_state_machine.transition_to("Camera/Default")
 		camera_rig.emit_signal("aim_fired",
 				camera_rig.aim_ray.get_collision_point() if camera_rig.aim_ray.is_colliding()
