@@ -30,10 +30,10 @@ func physics_process(delta: float) -> void:
 	var move_direction: = get_move_direction()
 
 	if _input_relative.length() > 0:
-		process_camera_input(_input_relative * sensitivity_mouse * delta)
+		update_rotation(_input_relative * sensitivity_mouse * delta)
 		_input_relative = Vector2.ZERO
 	elif look_direction.length() > 0:
-		process_camera_input(look_direction * sensitivity_gamepad * delta)
+		update_rotation(look_direction * sensitivity_gamepad * delta)
 
 	var is_moving_towards_camera: bool = move_direction.x >= -deadzone_backwards and move_direction.x <= deadzone_backwards
 	if not (is_moving_towards_camera or _is_aiming):
@@ -59,14 +59,11 @@ func unhandled_input(event: InputEvent) -> void:
 			get_tree().set_input_as_handled()
 
 
-func process_camera_input(input: Vector2) -> void:
-	if input.x != 0:
-		camera_rig.rotation.y -= input.x
-	if input.y != 0:
-		var angle: = input.y
-		camera_rig.rotation.x -= angle * -1.0 if is_y_inverted else angle
-		camera_rig.rotation.x = clamp(camera_rig.rotation.x, -0.75, 1.25)
-		camera_rig.rotation.z = 0
+func update_rotation(offset: Vector2) -> void:
+	camera_rig.rotation.y -= offset.x
+	camera_rig.rotation.x -= offset.y * -1.0 if is_y_inverted else offset.y
+	camera_rig.rotation.x = clamp(camera_rig.rotation.x, -0.75, 1.25)
+	camera_rig.rotation.z = 0
 
 
 """
