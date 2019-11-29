@@ -15,9 +15,7 @@ export var deadzone_backwards := 0.3
 export var sensitivity_gamepad: = Vector2(2.5, 2.5)
 export var sensitivity_mouse: = Vector2(0.1, 0.1)
 
-var _fov_current: float = fov_default
 var _input_relative: = Vector2.ZERO
-var _offset: = Vector3.ZERO
 var _is_aiming: = false
 
 
@@ -38,21 +36,10 @@ func physics_process(delta: float) -> void:
 		process_camera_input(look_direction * sensitivity_gamepad * delta)
 
 	var is_moving_towards_camera: bool = move_direction.x >= -deadzone_backwards and move_direction.x <= deadzone_backwards
-	if not is_moving_towards_camera and not _is_aiming:
+	if not (is_moving_towards_camera or _is_aiming):
 		auto_rotate(move_direction)
 
 	camera_rig.rotation.y = wrapf(camera_rig.rotation.y, -PI, PI)
-
-	if camera_rig.camera.fov != _fov_current:
-		camera_rig.camera.fov = lerp(camera_rig.camera.fov, _fov_current, 0.05)
-
-	camera_rig.spring_arm.translation = lerp(camera_rig.spring_arm.translation, camera_rig._position_start + _offset, 0.05)
-
-
-func enter(msg: Dictionary = {}) ->void:
-	_fov_current = msg["fov"] if "fov" in msg else fov_default
-	_offset = msg["offset"] if "offset" in msg else Vector3(0, 0, 0)
-	_is_aiming = msg["is_aiming"] if "is_aiming" in msg else false
 
 
 func auto_rotate(move_direction: Vector3) -> void:

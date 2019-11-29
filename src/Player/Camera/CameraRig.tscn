@@ -15,7 +15,7 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 0.87462, 0.48481, 0, -0.48481, 0.87462, 0, 0.5, 0.5 )
 current = true
 target = NodePath("../SpringArm/CameraTarget")
-speed = 10.0
+speed = 7.0
 enabled = true
 
 [node name="SpringArm" type="SpringArm" parent="."]
@@ -50,3 +50,5 @@ script = ExtResource( 3 )
 
 [node name="Aim" type="Node" parent="StateMachine/Camera"]
 script = ExtResource( 7 )
+
+[node name="Tween" type="Tween" parent="StateMachine/Camera/Aim"]

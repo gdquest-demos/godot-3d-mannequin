@@ -5,9 +5,11 @@ the field of view, position offset (over the shoulder), etc.
 """
 
 
+onready var tween: = $Tween
+
 export var is_first_person: bool = false
 export var fov: = 40.0
-export var offset_third_person: = Vector3(0.75, -0.7, 0)
+export var offset_camera: = Vector3(0.75, -0.7, 0)
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -33,18 +35,21 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
-	if is_first_person:
-		_parent.occlusion_ray.set_cast_to(Vector3(0, 0, 0))
-		msg["offset"] = -_parent.initial_position - Vector3(0.0, 0, 0.5)
-	else:
-		msg["fov"] = fov
-		msg["offset"] = offset_third_person
-	msg["is_aiming"] = true
-	_parent.enter(msg)
+	_parent._is_aiming = true
 	camera_rig.aim_target.visible = true
+
+	camera_rig.spring_arm.translation = camera_rig._position_start + offset_camera
+
+	
+	tween.interpolate_property(camera_rig.camera, 'fov', camera_rig.camera.fov, fov, 0.5, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	tween.start()
 
 
 func exit() -> void:
+	_parent._is_aiming = false
 	camera_rig.aim_target.visible = false
-	if is_first_person:
-		_parent.occlusion_ray.set_cast_to(_parent.initial_position)
+
+	camera_rig.spring_arm.translation = camera_rig._position_start
+
+	tween.interpolate_property(camera_rig.camera, 'fov', camera_rig.camera.fov, _parent.fov_default, 0.5, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	tween.start()
