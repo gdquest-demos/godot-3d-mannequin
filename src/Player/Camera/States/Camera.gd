@@ -1,11 +1,8 @@
 extends CameraState
 """
 Parent state for all camera based states for the Camera. Handles input based on
-mouse/gamepad and movement and configuration based on which state we're using.
-
-This state holds all of the main logic, with the state itself being configured
-or have its functions overriden or called by the child states. This keeps the
-logic contained in a central location while being easily modifiable.
+the mouse or the gamepad. The camera's movement depends on the active child state.
+Holds shared logic between all states that move or rotate the camera.
 """
 
 

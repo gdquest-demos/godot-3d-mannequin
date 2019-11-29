@@ -1,7 +1,8 @@
 extends CameraState
 """
-Logic state for the camera where configuration are made to the camera to set
-the field of view, position offset (over the shoulder), etc.
+Activates the aiming mode for the camera.
+Moves the camera to the character's shoulder, and narrows the field of view.
+Projects a target on the environment.
 """
 
 
@@ -15,7 +16,7 @@ export var offset_camera: = Vector3(0.75, -0.7, 0)
 func unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_aim"):
 		_state_machine.transition_to("Camera/Default")
-		get_tree().set_input_as_handled()
+
 	elif event.is_action_pressed("fire"):
 		_state_machine.transition_to("Camera/Default")
 		var target_position: Vector3 = (
@@ -24,7 +25,7 @@ func unhandled_input(event: InputEvent) -> void:
 			else camera_rig.get_global_transform().origin
 		)
 		camera_rig.emit_signal("aim_fired", target_position)
-		get_tree().set_input_as_handled()
+
 	else:
 		_parent.unhandled_input(event)
 

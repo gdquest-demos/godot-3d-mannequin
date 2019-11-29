@@ -1,6 +1,6 @@
 extends CameraState
 """
-Logic state for the camera - implies no modification to the camera settings.
+Rotates the camera around the character, delegating all the work to its parent state.
 """
 
 

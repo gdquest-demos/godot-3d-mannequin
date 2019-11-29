@@ -1,4 +1,7 @@
 extends Sprite3D
+"""
+Visual target shape that gets projected on the environment, to help the player aim.
+"""
 
 
 func _ready() -> void:
