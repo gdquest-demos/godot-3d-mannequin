@@ -6,8 +6,8 @@ and flies through the air to reach it.
 """
 
 
-var zip_speed:= 10.0
-var zip_target: Vector3 = Vector3.ZERO
+var speed: = 10.0
+var target: = Vector3.ZERO
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -16,13 +16,12 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func physics_process(delta: float) -> void:
-	var zipdest = zip_target - player.get_global_transform().origin + Vector3(0, -1.6, 0)
-	var aiming_length: float = (player.camera.aim_ray.cast_to.length() - zip_target.length() + 1)
-	
-	_parent.velocity += zipdest.normalized() * delta * aiming_length * zip_speed
-	
+	var direction: = (target - player.get_global_transform().origin).normalized()
+	var aim_length: float = player.camera.aim_ray.cast_to.length() - target.length() + 1.0
+
+	_parent.velocity = direction * speed
 	_parent.physics_process(delta)
-	
+
 	if player.get_slide_count() > 0:
 		if Input.is_action_pressed("interact"):
 			_parent.velocity = Vector3.ZERO
@@ -33,11 +32,14 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
-	if "zip_target" in msg:
-		zip_target = msg.zip_target
+	_parent.gravity = 0.0
+	if "target" in msg:
+		target = msg.target
 	else:
 		_state_machine.transition_to("Move/Idle")
 
 
 func exit() -> void:
-	zip_target = Vector3.ZERO
+	# FIXME: redo this bit
+	_parent.gravity = -80.0
+	target = Vector3.ZERO

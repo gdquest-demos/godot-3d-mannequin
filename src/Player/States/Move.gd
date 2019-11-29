@@ -44,18 +44,18 @@ func physics_process(delta: float) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
-	return
+	player.camera.connect("aim_fired", self, "_on_Camera_aim_fired")
 
 
 func exit() -> void:
-	return
+	player.camera.disconnect("aim_fired", self, "_on_Camera_aim_fired")
 
 
 """Callback to transition to the optional Zip state
 It only works if the Zip state node exists.
 It is intended to work via signals"""
 func _on_Camera_aim_fired(target_vector: Vector3) -> void:
-	_state_machine.transition_to("Move/Zip", { zip_target = target_vector })
+	_state_machine.transition_to("Move/Zip", { target = target_vector })
 
 
 static func get_input_direction() -> Vector3:
