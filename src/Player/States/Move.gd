@@ -1,9 +1,8 @@
 extends PlayerState
 """
 Parent state for all movement-related states for the Player.
-
-Holds all of the base movement logic. 
-Child states can override this state's functions or change its properties. 
+Holds all of the base movement logic.
+Child states can override this state's functions or change its properties.
 This keeps the logic grouped in one location.
 """
 
@@ -34,11 +33,11 @@ func physics_process(delta: float) -> void:
 		move_direction = move_direction.normalized()
 	move_direction.y = 0
 	skin.move_direction = move_direction
-	
+
 	# Rotation
 	if move_direction:
 		player.look_at(player.global_transform.origin + move_direction, Vector3.UP)
-	
+
 	# Movement
 	velocity = calculate_velocity(velocity, max_speed, move_speed, gravity, delta, move_direction)
 	velocity = player.move_and_slide(velocity, Vector3.UP)
