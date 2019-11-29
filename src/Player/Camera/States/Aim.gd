@@ -41,6 +41,7 @@ func enter(msg: Dictionary = {}) -> void:
 		msg["offset"] = offset_third_person
 	msg["is_aiming"] = true
 	_parent.enter(msg)
+	camera_rig.aim_target.visible = true
 
 
 func exit() -> void:
