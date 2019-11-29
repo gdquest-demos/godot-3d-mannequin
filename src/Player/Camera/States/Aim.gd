@@ -16,9 +16,13 @@ func unhandled_input(event: InputEvent) -> void:
 		get_tree().set_input_as_handled()
 	elif event.is_action_pressed("fire"):
 		_state_machine.transition_to("Camera/Default")
-		camera_rig.emit_signal("aim_fired",
-				camera_rig.aim_ray.get_collision_point() if camera_rig.aim_ray.is_colliding()
-				else camera_rig.get_global_transform().origin)
+		var target_position: Vector3 = (
+			camera_rig.aim_ray.get_collision_point()
+			if camera_rig.aim_ray.is_colliding()
+			else camera_rig.get_global_transform().origin
+		)
+		camera_rig.emit_signal("aim_fired", target_position)
+		get_tree().set_input_as_handled()
 	else:
 		_parent.unhandled_input(event)
 

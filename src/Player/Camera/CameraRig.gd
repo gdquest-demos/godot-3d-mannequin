@@ -7,7 +7,7 @@ or some frequently used nodes in the scene itself caching the call to get_node
 """
 
 
-signal aim_fired(target_vector)
+signal aim_fired(target_position)
 
 onready var camera: InterpolatedCamera = $InterpolatedCamera
 onready var spring_arm: SpringArm = $SpringArm
@@ -17,6 +17,7 @@ onready var aim_target: Sprite3D = $AimTarget
 var player: KinematicBody
 
 onready var _position_start: Vector3 = translation
+
 
 func _ready() -> void:
 	set_as_toplevel(true)
