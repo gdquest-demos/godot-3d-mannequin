@@ -21,6 +21,11 @@ target = NodePath("../SpringArm/CameraTarget")
 speed = 7.0
 enabled = true
 
+[node name="AimRay" type="RayCast" parent="InterpolatedCamera"]
+transform = Transform( 1, 0, 0, 0, 0.999847, 0.0174524, 0, -0.0174524, 0.999847, 0, -0.194905, -0.679715 )
+cast_to = Vector3( 0, 0, -20 )
+collision_mask = 2
+
 [node name="SpringArm" type="SpringArm" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.87462, 0.48481, 0, -0.48481, 0.87462, 0, 0.5, 0.5 )
 collision_mask = 2
@@ -30,11 +35,6 @@ margin = 0.5
 
 [node name="CameraTarget" type="Position3D" parent="SpringArm"]
 transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
-
-[node name="AimRay" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0 )
-cast_to = Vector3( 0, 0, -20 )
-collision_mask = 2
 
 [node name="AimTarget" type="Sprite3D" parent="."]
 visible = false
@@ -54,5 +54,6 @@ script = ExtResource( 3 )
 
 [node name="Aim" type="Node" parent="StateMachine/Camera"]
 script = ExtResource( 7 )
+offset_camera = Vector3( 0.75, -1, 0 )
 
 [node name="Tween" type="Tween" parent="StateMachine/Camera/Aim"]

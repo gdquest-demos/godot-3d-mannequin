@@ -11,7 +11,7 @@ signal aim_fired(target_position)
 
 onready var camera: InterpolatedCamera = $InterpolatedCamera
 onready var spring_arm: SpringArm = $SpringArm
-onready var aim_ray: RayCast = $AimRay
+onready var aim_ray: RayCast = $InterpolatedCamera/AimRay
 onready var aim_target: Sprite3D = $AimTarget
 
 var player: KinematicBody
