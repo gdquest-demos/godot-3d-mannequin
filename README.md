@@ -13,7 +13,7 @@
 
 <!-- markdown-toc end -->
 
-An Open Source 3d character and character controller for the Godot game engine.
+An Open Source 3d character and character controller for the Godot game engine version 3.2 and above.
 
 ![The mannequin in-game](./assets/screenshots/prototype-1.png)
 
