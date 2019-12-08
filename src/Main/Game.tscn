@@ -41,6 +41,9 @@ shape = SubResource( 2 )
 transform = Transform( 0.766044, 0.166366, -0.620885, 0.271654, 0.791635, 0.547283, 0.582563, -0.587909, 0.561233, -3.00978, 2.72808, 0 )
 light_energy = 0.8
 shadow_enabled = true
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.2
+directional_shadow_bias_split_scale = 0.75
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 4 )
