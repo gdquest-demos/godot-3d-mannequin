@@ -15,7 +15,8 @@
 
 An Open Source 3d character and character controller for the Godot game engine version 3.2 and above.
 
-![The mannequin in-game](./assets/screenshots/prototype-1.png)
+![The mannequin in-game](./assets/screenshots/mannequiny-0.2.png)
+
 
 This is a third person character controller designed to work both with the keyboard and a gamepad. It features a camera that can auto-rotate or that can be controlled with a joystick.
 
