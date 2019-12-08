@@ -6,7 +6,7 @@ Holds shared logic between all states that move or rotate the camera.
 """
 
 
-export var is_y_inverted: = true
+export var is_y_inverted: = false
 export var fov_default: = 70.0
 export var deadzone_backwards := 0.3
 export var sensitivity_gamepad: = Vector2(2.5, 2.5)
