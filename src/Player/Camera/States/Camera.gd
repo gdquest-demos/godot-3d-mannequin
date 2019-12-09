@@ -16,7 +16,7 @@ var _input_relative: = Vector2.ZERO
 var _is_aiming: = false
 
 
-func physics_process(delta: float) -> void:
+func process(delta: float) -> void:
 	camera_rig.global_transform.origin = camera_rig.player.global_transform.origin + camera_rig._position_start
 
 	var look_direction: = get_look_direction()

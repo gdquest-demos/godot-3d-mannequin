@@ -22,6 +22,10 @@ func unhandled_input(event: InputEvent) -> void:
 	return
 
 
+func process(delta: float) -> void:
+	return
+
+
 func physics_process(delta: float) -> void:
 	return
 

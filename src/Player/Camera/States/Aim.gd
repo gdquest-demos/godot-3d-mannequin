@@ -30,8 +30,8 @@ func unhandled_input(event: InputEvent) -> void:
 		_parent.unhandled_input(event)
 
 
-func physics_process(delta: float) -> void:
-	_parent.physics_process(delta)
+func process(delta: float) -> void:
+	_parent.process(delta)
 	camera_rig.aim_target.update(camera_rig.aim_ray)
 
 
@@ -41,7 +41,6 @@ func enter(msg: Dictionary = {}) -> void:
 
 	camera_rig.spring_arm.translation = camera_rig._position_start + offset_camera
 
-	
 	tween.interpolate_property(camera_rig.camera, 'fov', camera_rig.camera.fov, fov, 0.5, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	tween.start()
 
