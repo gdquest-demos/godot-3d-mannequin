@@ -54,7 +54,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 func update_rotation(offset: Vector2) -> void:
 	camera_rig.rotation.y -= offset.x
-	camera_rig.rotation.x -= offset.y * -1.0 if is_y_inverted else offset.y
+	camera_rig.rotation.x += offset.y * -1.0 if is_y_inverted else offset.y
 	camera_rig.rotation.x = clamp(camera_rig.rotation.x, -0.75, 1.25)
 	camera_rig.rotation.z = 0
 
