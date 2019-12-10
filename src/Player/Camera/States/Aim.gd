@@ -8,9 +8,8 @@ Projects a target on the environment.
 
 onready var tween: = $Tween
 
-export var is_first_person: bool = false
 export var fov: = 40.0
-export var offset_camera: = Vector3(0.75, -0.7, 0) setget set_offset_camera
+export var offset_camera: = Vector3(0.75, -0.7, 0)
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -53,7 +52,3 @@ func exit() -> void:
 
 	tween.interpolate_property(camera_rig.camera, 'fov', camera_rig.camera.fov, _parent.fov_default, 0.5, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	tween.start()
-
-
-func set_offset_camera(value: Vector3) -> void:
-	offset_camera = value
