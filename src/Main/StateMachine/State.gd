@@ -15,7 +15,9 @@ var _parent: State = null
 
 func _ready() -> void:
 	yield(owner, "ready")
-	_parent = get_parent()
+	var parent: = get_parent()
+	if not parent.is_in_group("state_machine"):
+		_parent = parent
 
 
 func unhandled_input(event: InputEvent) -> void:
