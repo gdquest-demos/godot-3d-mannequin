@@ -7,9 +7,8 @@ This keeps the logic grouped in one location.
 """
 
 
-export var max_speed: = Vector3(50.0, 50.0, 500.0)
+export var max_speed: = 50.0
 export var move_speed: = Vector3(500, 500, 500)
-export var max_rotation_speed: = 0.5
 export var gravity = -80.0
 export var jump_impulse = 25
 
@@ -68,7 +67,7 @@ static func get_input_direction() -> Vector3:
 
 static func calculate_velocity(
 		old_velocity: Vector3,
-		max_speed: Vector3,
+		max_speed: float,
 		move_speed: Vector3,
 		gravity: float,
 		delta: float,
@@ -76,12 +75,9 @@ static func calculate_velocity(
 	) -> Vector3:
 		var new_velocity: = old_velocity
 
-		if move_direction.length() > 1:
-			move_direction = move_direction.normalized()
-
 		new_velocity = move_direction * delta * move_speed
-		if new_velocity.length() > max_speed.z:
-			new_velocity = new_velocity.normalized() * max_speed.z
+		if new_velocity.length() > max_speed:
+			new_velocity = new_velocity.normalized() * max_speed
 		new_velocity.y = old_velocity.y + gravity * delta
 
 		return new_velocity
