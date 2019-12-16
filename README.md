@@ -1,3 +1,5 @@
+![banner image showing the character in several poses](https://repository-images.githubusercontent.com/199621943/d1716f00-1fe7-11ea-9d26-88ac15f865c7)
+
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
