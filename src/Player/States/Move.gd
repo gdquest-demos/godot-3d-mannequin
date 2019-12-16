@@ -8,7 +8,7 @@ This keeps the logic grouped in one location.
 
 
 export var max_speed: = 50.0
-export var move_speed: = Vector3(500, 500, 500)
+export var move_speed: = 500.0
 export var gravity = -80.0
 export var jump_impulse = 25
 
@@ -38,7 +38,7 @@ func physics_process(delta: float) -> void:
 		player.look_at(player.global_transform.origin + move_direction, Vector3.UP)
 
 	# Movement
-	velocity = calculate_velocity(velocity, max_speed, move_speed, gravity, delta, move_direction)
+	velocity = calculate_velocity(velocity, move_direction, delta)
 	velocity = player.move_and_slide(velocity, Vector3.UP)
 
 
@@ -65,19 +65,16 @@ static func get_input_direction() -> Vector3:
 		)
 
 
-static func calculate_velocity(
-		old_velocity: Vector3,
-		max_speed: float,
-		move_speed: Vector3,
-		gravity: float,
-		delta: float,
-		move_direction: Vector3
+func calculate_velocity(
+		velocity_current: Vector3,
+		move_direction: Vector3,
+		delta: float
 	) -> Vector3:
-		var new_velocity: = old_velocity
+		var velocity_new: = velocity_current
 
-		new_velocity = move_direction * delta * move_speed
-		if new_velocity.length() > max_speed:
-			new_velocity = new_velocity.normalized() * max_speed
-		new_velocity.y = old_velocity.y + gravity * delta
+		velocity_new = move_direction * delta * move_speed
+		if velocity_new.length() > max_speed:
+			velocity_new = velocity_new.normalized() * max_speed
+		velocity_new.y = velocity_current.y + gravity * delta
 
-		return new_velocity
+		return velocity_new
