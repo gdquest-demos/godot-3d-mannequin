@@ -1,11 +1,9 @@
 extends Spatial
 class_name Mannequiny
-"""
-Controls the animation tree's transitions for this animated character.
+# Controls the animation tree's transitions for this animated character.
 
-It has a signal connected to the player state machine, and uses the resulting
-state names to translate them into the states for the animation tree.
-"""
+# # It has a signal connected to the player state machine, and uses the resulting
+# state names to translate them into the states for the animation tree.
 
 
 enum States {IDLE, RUN, AIR, LAND}

@@ -1,7 +1,5 @@
 extends CameraState
-"""
-Rotates the camera around the character, delegating all the work to its parent state.
-"""
+# Rotates the camera around the character, delegating all the work to its parent state.
 
 
 func unhandled_input(event: InputEvent) -> void:

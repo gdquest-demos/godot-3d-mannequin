@@ -1,9 +1,7 @@
 extends CameraState
-"""
-Parent state for all camera based states for the Camera. Handles input based on
-the mouse or the gamepad. The camera's movement depends on the active child state.
-Holds shared logic between all states that move or rotate the camera.
-"""
+# Parent state for all camera based states for the Camera. Handles input based on
+# the mouse or the gamepad. The camera's movement depends on the active child state.
+# Holds shared logic between all states that move or rotate the camera.
 
 
 export var is_y_inverted: = false
@@ -59,9 +57,7 @@ func update_rotation(offset: Vector2) -> void:
 	camera_rig.rotation.z = 0
 
 
-"""
-Returns the direction of the camera movement from the player
-"""
+# Returns the direction of the camera movement from the player
 static func get_look_direction() -> Vector2:
 	return Vector2(
 			Input.get_action_strength("look_right") - Input.get_action_strength("look_left"),
@@ -69,9 +65,7 @@ static func get_look_direction() -> Vector2:
 		).normalized()
 
 
-"""
-Returns the move direction of the character controlled by the player
-"""
+# Returns the move direction of the character controlled by the player
 static func get_move_direction() -> Vector3:
 	return Vector3(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),

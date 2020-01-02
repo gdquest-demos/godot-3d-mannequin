@@ -1,9 +1,7 @@
 extends CameraState
-"""
-Activates the aiming mode for the camera.
-Moves the camera to the character's shoulder, and narrows the field of view.
-Projects a target on the environment.
-"""
+# Activates the aiming mode for the camera.
+# Moves the camera to the character's shoulder, and narrows the field of view.
+# Projects a target on the environment.
 
 
 onready var tween: = $Tween

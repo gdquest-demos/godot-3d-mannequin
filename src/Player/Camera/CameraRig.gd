@@ -1,10 +1,8 @@
 tool
 extends Spatial
 class_name CameraRig
-"""
-Accessor class that gives the nodes in the scene access the player or some
-frequently used nodes in the scene itself.
-"""
+# Accessor class that gives the nodes in the scene access the player or some
+# frequently used nodes in the scene itself.
 
 
 signal aim_fired(target_position)

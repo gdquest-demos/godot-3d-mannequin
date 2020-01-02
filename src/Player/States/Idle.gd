@@ -1,8 +1,6 @@
 extends PlayerState
-"""
-State for when there is no movement input.
-Supports triggering jump after the player started to fall.
-"""
+# State for when there is no movement input.
+# Supports triggering jump after the player started to fall.
 
 
 func unhandled_input(event: InputEvent) -> void:

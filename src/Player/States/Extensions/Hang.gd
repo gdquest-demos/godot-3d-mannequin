@@ -1,7 +1,5 @@
 extends PlayerState
-"""
-State that does not involve gravity or further movement until released.
-"""
+# State that does not involve gravity or further movement until released.
 
 
 func unhandled_input(event: InputEvent) -> void:

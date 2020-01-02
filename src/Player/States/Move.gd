@@ -1,10 +1,8 @@
 extends PlayerState
-"""
-Parent state for all movement-related states for the Player.
-Holds all of the base movement logic.
-Child states can override this state's functions or change its properties.
-This keeps the logic grouped in one location.
-"""
+# Parent state for all movement-related states for the Player.
+# Holds all of the base movement logic.
+# Child states can override this state's functions or change its properties.
+# This keeps the logic grouped in one location.
 
 
 export var max_speed: = 50.0
@@ -50,9 +48,9 @@ func exit() -> void:
 	player.camera.disconnect("aim_fired", self, "_on_Camera_aim_fired")
 
 
-"""Callback to transition to the optional Zip state
-It only works if the Zip state node exists.
-It is intended to work via signals"""
+# Callback to transition to the optional Zip state
+# It only works if the Zip state node exists.
+# It is intended to work via signals
 func _on_Camera_aim_fired(target_vector: Vector3) -> void:
 	_state_machine.transition_to("Move/Zip", { target = target_vector })
 

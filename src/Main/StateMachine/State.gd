@@ -1,11 +1,9 @@
 extends Node
 class_name State
-"""
-State interface to use in Hierarchical State Machines.
-The lowest leaf tries to handle callbacks, and if it can't, it delegates the work to its parent.
-It's up to the user to call the parent state's functions, e.g. `_parent.physics_process(delta)`
-Use State as a child of a StateMachine node.
-"""
+# State interface to use in Hierarchical State Machines.
+# The lowest leaf tries to handle callbacks, and if it can't, it delegates the work to its parent.
+# It's up to the user to call the parent state's functions, e.g. `_parent.physics_process(delta)`
+# Use State as a child of a StateMachine node.
 
 
 onready var _state_machine: = _get_state_machine(self)

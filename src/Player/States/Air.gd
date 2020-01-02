@@ -1,7 +1,5 @@
 extends PlayerState
-"""
-State for when the player is jumping and falling.
-"""
+# State for when the player is jumping and falling.
 
 
 func physics_process(delta: float) -> void:

@@ -1,9 +1,7 @@
 extends PlayerState
-"""
-Hookshot style state for the player - gets a destination from an outside
-piece of logic (in this case, the Camera's aim state firing with a raycast)
-and flies through the air to reach it.
-"""
+# Hookshot style state for the player - gets a destination from an outside
+# piece of logic (in this case, the Camera's aim state firing with a raycast)
+# and flies through the air to reach it.
 
 
 var speed: = 10.0

@@ -1,10 +1,8 @@
 tool
-extends KinematicBody
 class_name Player
-"""
-Helper class for the Player scene's scripts to be able to have access to the
-camera and its orientation.
-"""
+extends KinematicBody
+# Helper class for the Player scene's scripts to be able to have access to the
+# camera and its orientation.
 
 
 onready var camera: CameraRig = $CameraRig

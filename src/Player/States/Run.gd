@@ -1,7 +1,5 @@
 extends PlayerState
-"""
-Basic state when the player is moving around until jumping or lack of input.
-"""
+# Basic state when the player is moving around until jumping or lack of input.
 
 
 func unhandled_input(event: InputEvent) -> void:
