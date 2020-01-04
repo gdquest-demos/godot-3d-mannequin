@@ -36,7 +36,7 @@ func process(delta: float) -> void:
 
 
 func auto_rotate(move_direction: Vector3) -> void:
-	var offset: float = camera_rig.rotation.y - camera_rig.player.rotation.y
+	var offset: float = camera_rig.player.rotation.y - camera_rig.rotation.y
 	var target_angle: float = (
 		camera_rig.player.rotation.y - 2 * PI if offset > PI
 		else camera_rig.player.rotation.y + 2 * PI if offset < -PI
@@ -61,7 +61,7 @@ func update_rotation(offset: Vector2) -> void:
 static func get_look_direction() -> Vector2:
 	return Vector2(
 			Input.get_action_strength("look_right") - Input.get_action_strength("look_left"),
-			Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
+			Input.get_action_strength("look_up") - Input.get_action_strength("look_down")
 		).normalized()
 
 
