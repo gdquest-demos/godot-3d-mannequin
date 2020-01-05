@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/3d/materials/floor.tres" type="Material" id=2]
 [ext_resource path="res://src/Main/Game.gd" type="Script" id=3]
 [ext_resource path="res://assets/3d/level/level_environment.tres" type="Environment" id=4]
 [ext_resource path="res://src/Level/Playground.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Debug/DebugPanel.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=7]
+[ext_resource path="res://src/Debug/DebugDock.gd" type="Script" id=8]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 100, 100 )
@@ -47,3 +50,27 @@ directional_shadow_bias_split_scale = 0.75
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_bottom = 1.0
+margin_right = 461.0
+theme = ExtResource( 7 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DebugPanel" parent="MarginContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 445.0
+margin_bottom = 1064.0
+reference_path = NodePath("../../Player/CameraRig/InterpolatedCamera")
+properties = PoolStringArray( "transform", "fov" )
+round_decimals = 3
+
+[editable path="Player"]
+
+[editable path="Player/CameraRig"]
