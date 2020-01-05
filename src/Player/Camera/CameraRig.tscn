@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Player/Camera/CameraRig.gd" type="Script" id=1]
 [ext_resource path="res://src/Player/Camera/AimTarget.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/2d/reticle.png" type="Texture" id=5]
 [ext_resource path="res://src/Player/Camera/States/Camera.gd" type="Script" id=6]
 [ext_resource path="res://src/Player/Camera/States/Aim.gd" type="Script" id=7]
+[ext_resource path="res://src/Player/Camera/SpringArm.gd" type="Script" id=8]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 0.5
@@ -32,6 +33,7 @@ collision_mask = 2
 shape = SubResource( 1 )
 spring_length = 5.0
 margin = 0.5
+script = ExtResource( 8 )
 
 [node name="CameraTarget" type="Position3D" parent="SpringArm"]
 transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
