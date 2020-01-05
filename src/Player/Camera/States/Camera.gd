@@ -3,10 +3,12 @@ extends CameraState
 # the mouse or the gamepad. The camera's movement depends on the active child state.
 # Holds shared logic between all states that move or rotate the camera.
 
+const ANGLE_X_MIN: = -PI/4
+const ANGLE_X_MAX: = PI/3
 
 export var is_y_inverted: = false
 export var fov_default: = 70.0
-export var deadzone_backwards := 0.3
+export var deadzone := PI/10
 export var sensitivity_gamepad: = Vector2(2.5, 2.5)
 export var sensitivity_mouse: = Vector2(0.1, 0.1)
 
@@ -27,7 +29,7 @@ func process(delta: float) -> void:
 		update_rotation(look_direction * sensitivity_gamepad * delta)
 
 	var is_moving_towards_camera: bool = (
-		move_direction.x >= -deadzone_backwards and move_direction.x <= deadzone_backwards
+		move_direction.x >= -deadzone and move_direction.x <= deadzone
 	)
 	if not (is_moving_towards_camera or _is_aiming):
 		auto_rotate(move_direction)
@@ -53,7 +55,7 @@ func unhandled_input(event: InputEvent) -> void:
 func update_rotation(offset: Vector2) -> void:
 	camera_rig.rotation.y -= offset.x
 	camera_rig.rotation.x += offset.y * -1.0 if is_y_inverted else offset.y
-	camera_rig.rotation.x = clamp(camera_rig.rotation.x, -0.75, 1.25)
+	camera_rig.rotation.x = clamp(camera_rig.rotation.x, ANGLE_X_MIN, ANGLE_X_MAX)
 	camera_rig.rotation.z = 0
 
 
