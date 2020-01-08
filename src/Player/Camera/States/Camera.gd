@@ -3,6 +3,8 @@ extends CameraState
 # the mouse or the gamepad. The camera's movement depends on the active child state.
 # Holds shared logic between all states that move or rotate the camera.
 
+const ZOOM_STEP: = 0.1
+
 const ANGLE_X_MIN: = -PI/4
 const ANGLE_X_MAX: = PI/3
 
@@ -48,7 +50,11 @@ func auto_rotate(move_direction: Vector3) -> void:
 
 
 func unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if event.is_action_pressed("zoom_in"):
+		camera_rig.zoom += ZOOM_STEP
+	elif event.is_action_pressed("zoom_out"):
+		camera_rig.zoom -= ZOOM_STEP
+	elif event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		_input_relative += event.get_relative()
 
 
