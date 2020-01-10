@@ -71,9 +71,9 @@ As an example, there is the `Extensions` folder which contains additional player
 
 # Support our work #
 
-This free series is sponsored by our [platformer game creation course](https://gdquest.mavenseed.com).
-
 GDQuest is a social company focused on education and bringing people together around Free Software. 
+
+This Free Software is sponsored by our course [Code a Professional 3D Character with Godot](https://gdquest.mavenseed.com/courses/code-a-professional-3d-character-with-godot).
 
 We share **the techniques professionals use to make games** and open source the code for most of our projects on [our GitHub page](https://github.com/GDquest/).
 
