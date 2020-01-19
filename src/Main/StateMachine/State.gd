@@ -19,23 +19,23 @@ func _ready() -> void:
 
 
 func unhandled_input(event: InputEvent) -> void:
-	return
+	pass
 
 
 func process(delta: float) -> void:
-	return
+	pass
 
 
 func physics_process(delta: float) -> void:
-	return
+	pass
 
 
 func enter(msg: Dictionary = {}) -> void:
-	return
+	pass
 
 
 func exit() -> void:
-	return
+	pass
 
 
 func _get_state_machine(node: Node) -> Node:
