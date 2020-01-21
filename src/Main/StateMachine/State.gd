@@ -30,7 +30,7 @@ func physics_process(delta: float) -> void:
 	pass
 
 
-func enter(msg: Dictionary = {}) -> void:
+func enter(msg := {}) -> void:
 	pass
 
 
