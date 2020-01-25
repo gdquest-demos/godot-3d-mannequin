@@ -5,8 +5,8 @@ extends PlayerState
 # This keeps the logic grouped in one location.
 
 
-export var max_speed: = 50.0
-export var move_speed: = 500.0
+export var max_speed: = 12.0
+export var move_speed: = 10.0
 export var gravity = -80.0
 export var jump_impulse = 25
 
@@ -70,7 +70,7 @@ func calculate_velocity(
 	) -> Vector3:
 		var velocity_new: = velocity_current
 
-		velocity_new = move_direction * delta * move_speed
+		velocity_new = move_direction * move_speed
 		if velocity_new.length() > max_speed:
 			velocity_new = velocity_new.normalized() * max_speed
 		velocity_new.y = velocity_current.y + gravity * delta
