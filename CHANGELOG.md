@@ -2,7 +2,7 @@
 
 This document lists the new features, improvements, changes, and bug fixes in each new release of the Open 3D Mannequin.
 
-## [in development] Open 3D Mannequin 0.3 ##
+## Open 3D Mannequin 0.3 ##
 
 ### New features ###
 
@@ -40,6 +40,7 @@ In this release, we mostly refactored and improved the code for future developme
 - Fixed type error in the latest Godot 3.2 build.
 - Fixed calculating the opposite value for camera Y inversion logic.
 - Fixed slow camera movement on monitors with high refresh rates. We now use `_process` instead of `_physics_process` for camera movement.
+- Fixed a memory leak in Godot 3.2.
 
 ## Known Issues ##
 
