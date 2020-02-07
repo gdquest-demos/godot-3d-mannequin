@@ -2,7 +2,13 @@
 
 This document lists the new features, improvements, changes, and bug fixes in each new release of the Open 3D Mannequin.
 
+## Open 3D Mannequin 0.4 ##
+
 ## Open 3D Mannequin 0.3 ##
+
+### Improvements ###
+
+- The mannequin now smoothly rotates instead of changing direction instantly.
 
 ### New features ###
 
