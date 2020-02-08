@@ -9,7 +9,8 @@ export var max_speed: = 12.0
 export var move_speed: = 10.0
 export var gravity = -80.0
 export var jump_impulse = 25
-export(float, 0, 0.25, 0.005) var rotation_interpolation = 0.05
+# The amount of interpolation applied to turning in fraction of turn remaining after one tenth of a second
+export(float, 0.0, 0.9, 0.01) var rotation_interpolation: = 0.22
 
 var velocity: = Vector3.ZERO
 
@@ -34,10 +35,8 @@ func physics_process(delta: float) -> void:
 
 	# Rotation
 	if move_direction:
-		# To avoid dividing by 0, use 1 if rotation_interpolation equals 0
-		var interpolation_factor: float = 1 if rotation_interpolation == 0 else delta / rotation_interpolation
 		var target_direction: = player.transform.looking_at(player.global_transform.origin + move_direction, Vector3.UP)
-		player.transform = player.transform.interpolate_with(target_direction, interpolation_factor)
+		player.transform = player.transform.interpolate_with(target_direction, 1 - pow(rotation_interpolation, delta * 10))
 
 	# Movement
 	velocity = calculate_velocity(velocity, move_direction, delta)
