@@ -31,4 +31,6 @@ func _get_configuration_warning() -> String:
 
 func set_zoom(value: float) -> void:
 	zoom = clamp(value, 0.0, 1.0)
+	if not spring_arm:
+		yield(spring_arm, "ready")
 	spring_arm.zoom = zoom
