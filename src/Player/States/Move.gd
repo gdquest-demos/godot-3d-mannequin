@@ -70,9 +70,7 @@ func calculate_velocity(
 		move_direction: Vector3,
 		delta: float
 	) -> Vector3:
-		var velocity_new: = velocity_current
-
-		velocity_new = move_direction * move_speed
+		var velocity_new := move_direction * move_speed
 		if velocity_new.length() > max_speed:
 			velocity_new = velocity_new.normalized() * max_speed
 		velocity_new.y = velocity_current.y + gravity * delta
