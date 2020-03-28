@@ -46,7 +46,8 @@ In this release, we mostly refactored and improved the code for future developme
 - Fixed type error in the latest Godot 3.2 build.
 - Fixed calculating the opposite value for camera Y inversion logic.
 - Fixed slow camera movement on monitors with high refresh rates. We now use `_process` instead of `_physics_process` for camera movement.
-- Fixed a memory leak in Godot 3.2.
+- Fixed a memory leak in Godot 3.2.   
+- Fixed mouse inverted Y with disabled is_y_inverted.
 
 ## Known Issues ##
 
@@ -72,7 +73,8 @@ ground the player is aiming at. It is not working at the moment.
 
 - Made animation tree code controllable from the player's state machine, instead of using signals.
 - Refactored the code to make it simpler.
-- Reorganized files and folders to make the project easier to browse.
+- Reorganized files and folders to make the project easier to browse.   
+- Added slope to playground
 
 ### Bug fixes ###
 
