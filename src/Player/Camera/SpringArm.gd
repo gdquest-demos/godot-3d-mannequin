@@ -22,4 +22,4 @@ func set_length_range(value: Vector2) -> void:
 func set_zoom(value: float) -> void:
 	assert(value >= 0.0 and value <= 1.0)
 	zoom = value
-	spring_length = length_range.y + length_range.x - lerp(length_range.x, length_range.y, zoom)
+	spring_length = lerp(length_range.y, length_range.x, zoom)
