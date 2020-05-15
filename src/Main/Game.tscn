@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/3d/materials/floor.tres" type="Material" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/Debug/DebugPanel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/theme/gdquest.theme" type="Theme" id=7]
 [ext_resource path="res://src/Debug/DebugDock.gd" type="Script" id=8]
+[ext_resource path="res://src/Level/Rampy.tscn" type="PackedScene" id=9]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 100, 100 )
@@ -23,8 +24,15 @@ script = ExtResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.58673, -0.0176746, -5.36121 )
 collision_mask = 2
 
+[node name="SpringArm" parent="Player/CameraRig" index="1"]
+length_range = Vector2( 3, 6 )
+zoom = 0.5
+
 [node name="Playground" parent="." instance=ExtResource( 5 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -16 )
+
+[node name="Rampy" parent="." instance=ExtResource( 9 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 15 )
 
 [node name="TestMap" type="Spatial" parent="."]
 
@@ -67,6 +75,8 @@ margin_left = 16.0
 margin_top = 16.0
 margin_right = 445.0
 margin_bottom = 1064.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 reference_path = NodePath("../../Player/CameraRig/InterpolatedCamera")
 properties = PoolStringArray( "transform", "fov" )
 round_decimals = 3

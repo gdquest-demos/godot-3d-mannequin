@@ -12,7 +12,7 @@ export var jump_impulse = 25
 export(float, 0.1, 20.0, 0.1) var rotation_speed_factor: = 10.0
 
 var velocity: = Vector3.ZERO
-
+var snap: = Vector3.DOWN
 
 func unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
@@ -39,7 +39,7 @@ func physics_process(delta: float) -> void:
 
 	# Movement
 	velocity = calculate_velocity(velocity, move_direction, delta)
-	velocity = player.move_and_slide(velocity, Vector3.UP)
+	velocity = player.move_and_slide_with_snap(velocity, snap, Vector3.UP, true)
 
 
 func enter(msg: Dictionary = {}) -> void:

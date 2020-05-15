@@ -8,7 +8,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 func physics_process(delta: float) -> void:
 	_parent.physics_process(delta)
-	if player.is_on_floor() or player.is_on_wall():
+	if player.is_on_floor() :
 		if _parent.velocity.length() < 0.001:
 			_state_machine.transition_to("Move/Idle")
 	else:
