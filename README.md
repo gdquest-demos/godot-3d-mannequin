@@ -26,7 +26,7 @@ Open 3D Mannequin is an Open Source 3d character and character controller for th
 
 This is a third person character controller designed to work both with the keyboard and a gamepad. It features a camera that can auto-rotate or that can be controlled with a joystick.
 
-# Quick Start Guide
+## Quick Start Guide
 
 The 3D Third Person Character Controller is made of two scenes:
 
@@ -35,23 +35,23 @@ The 3D Third Person Character Controller is made of two scenes:
 
 To use the default character, instance `Player` in your game. See `Game.tscn` for an example. In this demo, the obstacles are mesh instances with static body collisions making up a cube world.
 
-## Controls
+### Controls
 
 The game supports both mouse and keyboard, and the gamepad.
 
-# How it works
+## How it works
 
-## Player
+### Player
 
 The scene that deals with the movement, collision, and logic of the player. The player is a KinematicBody with a capsule collision shape, and the movement logic is within a [Finite State Machine](http://gameprogrammingpatterns.com/state.html).
 
 The scene also holds an instance of the `PlayerMesh` for animation purposes. This scene lives in the `PlayerMesh.tscn` scene. It holds the skeletal rig for the mesh's animation, the 3D model of the body and head sepearately, and the animation tree and player to control the animation workflow of the model. The lot is wrapped up in a spatial node with some logic to transition to which animation based on which state the player is in.
 
-## CameraRig
+### CameraRig
 
 The scene that deals with the CameraRig movement. It follows the Player in the game, but in code it moves and rotates separately from it. It has a `SpringArm` node to help with preventing collision with level geometry - moving the viewpoint forwards to prevent moving the camera inside geometry. It also has a system that holds the raycast for aiming-mode, and the 3D sprite that is a projected reticule. The logic is held in a finite state machine.
 
-# Configuration
+## Configuration
 
 To change the player and the camera's behavior, you need to change properties on the corresponding states in their state machine.
 
@@ -61,19 +61,19 @@ The CameraRig has more options. On the main CameraRig state in the CameraRig sce
 
 In addition, the Aim state allows some finer-tuned changes, like whether the aiming camera is first or third person, and by how much it should be offset over-the-shoulder of the character.
 
-# Customization
+## Customization
 
 While the scenes can be modified extensively with new nodes and raw code, the state machine model allow for some simple, new functionality with relative ease.
 
 As an example, there is the `Extensions` folder which contains additional player states for using the aiming view to fire a hookshot that pulls you towards the reticle. Once those states have been added to the Player's `Move` state, you only need to replace the return statement in Move's `enter` with code like `owner.camera.connect("aim_fired", self, "on_Camera_aim_fired")` and Move's `exit` with code like `owner.camera.disconnect("aim_fired", self, "on_Camera_aim_fired")`
 
-# Credits
+## Credits
 
 1. The Godot mannequin is a character made by [Luciano Muñoz](https://twitter.com/lucianomunoz_) In blender 2.80.
 1. Godot code by Josh aka [Cheeseness](https://twitter.com/ValiantCheese)
 1. Additional code by Francois Belair aka [Razoric480](https://twitter.com/Razoric480)
 
-# Support our work
+## Support our work
 
 GDQuest is a social company focused on education and bringing people together around Free Software.
 
@@ -85,3 +85,10 @@ You can:
 
 - Join the community on [Discord](https://discord.gg/dKUX7m3)
 - Follow us on [Twitter](https://twitter.com/NathanGDQuest)
+
+## Licenses
+
+This project is dual-licensed:
+
+- The source code is available under the MIT license.
+- Art assets (images, audio files) are [CC-By 4.0](https://creativecommons.org/licenses/by/4.0/). You can attribute them to `GDQuest and contributors (https://www.gdquest.com/)`.
