@@ -67,6 +67,12 @@ While the scenes can be modified extensively with new nodes and raw code, the st
 
 As an example, there is the `Extensions` folder which contains additional player states for using the aiming view to fire a hookshot that pulls you towards the reticle. Once those states have been added to the Player's `Move` state, you only need to replace the return statement in Move's `enter` with code like `owner.camera.connect("aim_fired", self, "on_Camera_aim_fired")` and Move's `exit` with code like `owner.camera.disconnect("aim_fired", self, "on_Camera_aim_fired")`
 
+## Animating the character
+
+The source Blender file is available in the [releases tab](releases). The character comes with all its animations. At first glance, it can look like it is lacking a rig.
+
+Instead of a complex rig with many controls, we use ephemeral rigs as seen in Richard Lico's 2018 GDC talk [Animating Quill](https://www.youtube.com/watch?v=u3CzLVpuE4k&t=2011s). To do so, we work with the Blender add-on [Rig on the Fly](https://gitlab.com/dypsloom/rigonthefly/). This allows you to quickly generate a rig and controls adapted to the animation at hand. Once the animation is done, you bake it, and you're done!
+
 ## Credits
 
 1. The Godot mannequin is a character made by [Luciano Muñoz](https://twitter.com/lucianomunoz_) In blender 2.80.
