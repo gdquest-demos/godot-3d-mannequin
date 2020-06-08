@@ -23,6 +23,10 @@ script = ExtResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.58673, -0.0176746, -5.36121 )
 collision_mask = 2
 
+[node name="SpringArm" parent="Player/CameraRig" index="1"]
+length_range = Vector2( 3, 6 )
+zoom = 0.5
+
 [node name="Playground" parent="." instance=ExtResource( 5 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -16 )
 

@@ -5,14 +5,13 @@ class_name Mannequiny
 # # It has a signal connected to the player state machine, and uses the resulting
 # state names to translate them into the states for the animation tree.
 
-
-enum States {IDLE, RUN, AIR, LAND}
+enum States { IDLE, RUN, AIR, LAND }
 
 onready var animation_tree: AnimationTree = $AnimationTree
 onready var _playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
 
-var move_direction: = Vector3.ZERO setget set_move_direction
-var is_moving: = false setget set_is_moving
+var move_direction := Vector3.ZERO setget set_move_direction
+var is_moving := false setget set_is_moving
 
 
 func _ready() -> void:

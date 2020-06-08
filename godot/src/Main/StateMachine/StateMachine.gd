@@ -5,10 +5,10 @@ class_name StateMachine
 
 signal transitioned(state_path)
 
-export var initial_state: = NodePath()
+export var initial_state := NodePath()
 
 onready var state: State = get_node(initial_state) setget set_state
-onready var _state_name: = state.name
+onready var _state_name := state.name
 
 
 func _init() -> void:
@@ -36,7 +36,7 @@ func transition_to(target_state_path: String, msg: Dictionary = {}) -> void:
 	if not has_node(target_state_path):
 		return
 
-	var target_state: = get_node(target_state_path)
+	var target_state := get_node(target_state_path)
 
 	state.exit()
 	self.state = target_state

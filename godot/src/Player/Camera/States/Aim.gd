@@ -3,11 +3,10 @@ extends CameraState
 # Moves the camera to the character's shoulder, and narrows the field of view.
 # Projects a target on the environment.
 
+onready var tween := $Tween
 
-onready var tween: = $Tween
-
-export var fov: = 40.0
-export var offset_camera: = Vector3(0.75, -0.7, 0)
+export var fov := 40.0
+export var offset_camera := Vector3(0.75, -0.7, 0)
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -38,7 +37,9 @@ func enter(msg: Dictionary = {}) -> void:
 
 	camera_rig.spring_arm.translation = camera_rig._position_start + offset_camera
 
-	tween.interpolate_property(camera_rig.camera, 'fov', camera_rig.camera.fov, fov, 0.5, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	tween.interpolate_property(
+		camera_rig.camera, 'fov', camera_rig.camera.fov, fov, 0.5, Tween.TRANS_QUAD, Tween.EASE_OUT
+	)
 	tween.start()
 
 
@@ -48,5 +49,13 @@ func exit() -> void:
 
 	camera_rig.spring_arm.translation = camera_rig.spring_arm._position_start
 
-	tween.interpolate_property(camera_rig.camera, 'fov', camera_rig.camera.fov, _parent.fov_default, 0.5, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	tween.interpolate_property(
+		camera_rig.camera,
+		'fov',
+		camera_rig.camera.fov,
+		_parent.fov_default,
+		0.5,
+		Tween.TRANS_QUAD,
+		Tween.EASE_OUT
+	)
 	tween.start()

@@ -4,7 +4,6 @@ class_name CameraRig
 # Accessor class that gives the nodes in the scene access the player or some
 # frequently used nodes in the scene itself.
 
-
 signal aim_fired(target_position)
 
 onready var camera: InterpolatedCamera = $InterpolatedCamera
@@ -14,7 +13,7 @@ onready var aim_target: Sprite3D = $AimTarget
 
 var player: KinematicBody
 
-var zoom: = 0.5 setget set_zoom
+var zoom := 0.5 setget set_zoom
 
 onready var _position_start: Vector3 = translation
 

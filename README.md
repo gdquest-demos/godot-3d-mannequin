@@ -6,7 +6,7 @@ Open 3D Mannequin is an Open Source 3d character and character controller for th
 
 ➡ Follow us on [Twitter](https://twitter.com/NathanGDQuest) and [YouTube](https://www.youtube.com/c/gdquest/) for free game creation tutorials, tips, and news! Get one of our [Godot game creation courses](https://gdquest.mavenseed.com/) to support our work on Free Software.
 
-![The mannequin in-game](./assets/screenshots/mannequiny-0.2.png)
+![The mannequin in-game](./images/mannequiny-0.2.png)
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 
