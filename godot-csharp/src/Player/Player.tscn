@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://src/Player/Mannequiny.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Player/Player.cs" type="Script" id=2]
+[ext_resource path="res://src/Player/States/Move.cs" type="Script" id=3]
+[ext_resource path="res://src/Main/StateMachine/StateMachine.cs" type="Script" id=4]
+[ext_resource path="res://src/Player/States/Idle.cs" type="Script" id=5]
+[ext_resource path="res://src/Player/States/Run.cs" type="Script" id=6]
+[ext_resource path="res://src/Player/States/Air.cs" type="Script" id=7]
+[ext_resource path="res://src/Camera/CameraRig.tscn" type="PackedScene" id=8]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.25
+height = 1.25
+
+[node name="Player" type="KinematicBody"]
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CameraRig" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60486, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.872622, 0 )
+shape = SubResource( 1 )
+
+[node name="Mannequiny" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 4 )
+initialState = NodePath("Move/Idle")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+
+[node name="Idle" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 5 )
+
+[node name="Run" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 6 )
+
+[node name="Air" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 7 )
+
+[editable path="CameraRig"]

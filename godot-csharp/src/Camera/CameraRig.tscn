@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://src/Main/StateMachine/StateMachine.cs" type="Script" id=1]
+[ext_resource path="res://src/Camera/States/Camera.cs" type="Script" id=2]
+[ext_resource path="res://src/Camera/CameraRig.cs" type="Script" id=3]
+[ext_resource path="res://src/Camera/States/Default.cs" type="Script" id=4]
+[ext_resource path="res://src/Camera/States/Aim.cs" type="Script" id=5]
+[ext_resource path="res://assets/2d/reticle.png" type="Texture" id=6]
+[ext_resource path="res://src/Camera/AimTarget.cs" type="Script" id=7]
+[ext_resource path="res://src/Camera/SpringArm.cs" type="Script" id=8]
+
+[sub_resource type="CapsuleShape" id=1]
+height = 0.5
+
+[node name="CameraRig" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="InterpolatedCamera" type="InterpolatedCamera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0 )
+current = true
+target = NodePath("../SpringArm/CameraTarget")
+speed = 7.0
+enabled = true
+
+[node name="AimRay" type="RayCast" parent="InterpolatedCamera"]
+cast_to = Vector3( 0, 0, -40 )
+collision_mask = 2
+
+[node name="SpringArm" type="SpringArm" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0 )
+collision_mask = 2
+shape = SubResource( 1 )
+spring_length = 5.0
+script = ExtResource( 8 )
+
+[node name="CameraTarget" type="Position3D" parent="SpringArm"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="AimTarget" type="Sprite3D" parent="."]
+transform = Transform( -0.154568, 0, 0, 0, -0.154568, 0, 0, 0, -0.154568, 0, 0, 0 )
+cast_shadow = 0
+texture = ExtResource( 6 )
+script = ExtResource( 7 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 1 )
+initialState = NodePath("Camera/Default")
+
+[node name="Camera" type="Node" parent="StateMachine"]
+script = ExtResource( 2 )
+
+[node name="Default" type="Node" parent="StateMachine/Camera"]
+script = ExtResource( 4 )
+
+[node name="Aim" type="Node" parent="StateMachine/Camera"]
+script = ExtResource( 5 )
+offsetCamera = Vector3( 0.7, -1.8, 0 )
+
+[node name="Tween" type="Tween" parent="StateMachine/Camera/Aim"]
